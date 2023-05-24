@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "MikaBotRevamped": {
+      "commandName": "Project",
+      "commandLineArgs": "run"
+    }
+  }
+}

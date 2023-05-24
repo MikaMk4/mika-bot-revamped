@@ -23,16 +23,11 @@ namespace MikaBotRevamped
             CommandHandler commandHandler = new CommandHandler(client);
 
             client.Log += Log;
-            client.Ready += RegisterCommands;
             client.SlashCommandExecuted += commandHandler.SlashCommandHandler;
         }
 
-        public async Task RegisterCommands()
+        public async Task RegisterCommands(ulong guildId)
         {
-            await Log(new LogMessage(LogSeverity.Info, "Bot", "Registering Commands"));
-
-            var guild = client.GetGuild(870773459104436245); // Mondstadt Server
-
             List<ApplicationCommandProperties> applicationCommands = new();
 
             // ROLES COMMAND
@@ -72,12 +67,21 @@ namespace MikaBotRevamped
                 .AddOption("channel", ApplicationCommandOptionType.Channel, "Voice channel to join.");
             applicationCommands.Add(joinCommand.Build());
 
+            await client.LoginAsync(TokenType.Bot, token);
+            await client.StartAsync();
+            var guild = client.GetGuild(guildId);
+
+            await Log(new LogMessage(LogSeverity.Info, "Bot", "Registering Commands"));
+
             try
             {
                 await guild.BulkOverwriteApplicationCommandAsync(applicationCommands.ToArray());
             } catch (ApplicationCommandException e)
             {
                 await Log(new LogMessage(LogSeverity.Error, e.Source, e.Message));
+            } finally
+            {
+                await client.StopAsync();
             }
         }
 
