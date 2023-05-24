@@ -21,8 +21,14 @@ namespace MikaBotRevamped
             } catch (Exception e)
             {
                 var json = JsonConvert.SerializeObject(e, Formatting.Indented);
-                await bot.Log(new LogMessage(LogSeverity.Error, "Bot", json, e));
+                await Program.Log(new LogMessage(LogSeverity.Error, "Bot", json, e));
             }
+        }
+
+        public static Task Log(LogMessage msg)
+        {
+            Console.WriteLine(msg.ToString());
+            return Task.CompletedTask;
         }
     }
 }

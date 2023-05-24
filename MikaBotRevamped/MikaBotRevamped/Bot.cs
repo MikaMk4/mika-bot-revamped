@@ -22,14 +22,14 @@ namespace MikaBotRevamped
 
             CommandHandler commandHandler = new CommandHandler(client);
 
-            client.Log += Log;
+            client.Log += Program.Log;
             client.Ready += RegisterCommands;
             client.SlashCommandExecuted += commandHandler.SlashCommandHandler;
         }
 
         public async Task RegisterCommands()
         {
-            await Log(new LogMessage(LogSeverity.Info, "Bot", "Registering Commands"));
+            await Program.Log(new LogMessage(LogSeverity.Info, "Bot", "Registering Commands"));
 
             var guild = client.GetGuild(870773459104436245); // Mondstadt Server
 
@@ -47,22 +47,33 @@ namespace MikaBotRevamped
                 .WithName("music")
                 .WithDescription("Play music in a voice channel.")
                 .AddOption(new SlashCommandOptionBuilder()
-                    .WithName("play")
-                    .WithDescription("Play a local song.")
+                    .WithName("queue")
+                    .WithDescription("Queue a song.")
                     .WithType(ApplicationCommandOptionType.SubCommandGroup)
                     .AddOption(new SlashCommandOptionBuilder()
-                        .WithName("local")
-                        .WithDescription("Path to the local song.")
+                            .WithName("url")
+                            .WithDescription("Get video through an URL")
+                            .WithType(ApplicationCommandOptionType.SubCommand)
+                            .AddOption(new SlashCommandOptionBuilder()
+                                .WithName("input")
+                                .WithDescription("The URL to the video.")
+                                .WithType(ApplicationCommandOptionType.String)
+                                .WithRequired(true)
+                            )
+                     )
+                    .AddOption(new SlashCommandOptionBuilder()
+                        .WithName("search-query")
+                        .WithDescription("Get a video through a search.")
                         .WithType(ApplicationCommandOptionType.SubCommand)
                         .AddOption(new SlashCommandOptionBuilder()
-                            .WithName("path")
-                            .WithDescription("Path to the local song.")
+                            .WithName("input")
+                            .WithDescription("Search Query")
                             .WithType(ApplicationCommandOptionType.String)
                             .WithRequired(true)
                         )
-                        )
                     )
-                ;
+                );
+
             applicationCommands.Add(musicCommand.Build());
 
             // JOIN COMMAND
@@ -72,12 +83,18 @@ namespace MikaBotRevamped
                 .AddOption("channel", ApplicationCommandOptionType.Channel, "Voice channel to join.");
             applicationCommands.Add(joinCommand.Build());
 
+            // LEAVE COMMAND
+            var leaveCommand = new SlashCommandBuilder()
+                .WithName("leave")
+                .WithDescription("Let Mika-Bot leave the current voice channel");
+            applicationCommands.Add(leaveCommand.Build());
+
             try
             {
                 await guild.BulkOverwriteApplicationCommandAsync(applicationCommands.ToArray());
             } catch (ApplicationCommandException e)
             {
-                await Log(new LogMessage(LogSeverity.Error, e.Source, e.Message));
+                await Program.Log(new LogMessage(LogSeverity.Error, e.Source, e.Message));
             }
         }
 
@@ -87,12 +104,6 @@ namespace MikaBotRevamped
             await client.StartAsync();
 
             await Task.Delay(-1);
-        }
-
-        public Task Log(LogMessage msg)
-        {
-            Console.WriteLine(msg.ToString());
-            return Task.CompletedTask;
         }
     }
 }
