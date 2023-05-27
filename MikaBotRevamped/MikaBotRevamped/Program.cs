@@ -3,21 +3,35 @@ using Discord.Interactions;
 using Discord.WebSocket;
 using Newtonsoft.Json;
 using Pastel;
+using System.Reflection;
 
 namespace MikaBotRevamped
 {
     class Program
     {
+        public static Bot bot;
+
         public static Task Main(string[] args) => new Program().MainAsync();
 
         private async Task MainAsync()
         {
+            YoutubeProvider youtubeProvider = new();
+
+            // Dependency Injection gedöns
+            DependencyProvider dependencyProvider = new();
+            dependencyProvider.RegisterDependency<IYoutubeUrlProvider>(youtubeProvider);
+
+            // Hol alle Klassen die ISlashCommand implementieren
+            var slashCommandTypes = GetImplementingTypes(typeof(ISlashCommand));
+            // Instanziere diese Klassen und pack sie in eine Liste
+            var slashCommands = slashCommandTypes.Select(CreateInstance).Cast<ISlashCommand>().ToList();
+
+            // Setze die Dependencies für die SlashCommands
+            slashCommands.ForEach(slashCommand => slashCommand.SetDepencies(dependencyProvider));
+
             var token = Environment.GetEnvironmentVariable("DISCORD_API_TOKEN", EnvironmentVariableTarget.User);
 
-            var youtubeProvider = new YoutubeProvider();
-
-            Bot bot = new Bot(token, youtubeProvider);
-
+            bot = new(token, slashCommands);
             try
             {
                 await bot.Start();
@@ -28,7 +42,16 @@ namespace MikaBotRevamped
             }
         }
 
+        private static IEnumerable<Type> GetImplementingTypes(Type interfaceType)
+        {
+            return Assembly.GetExecutingAssembly().GetTypes()
+                .Where(type => type.IsClass && !type.IsAbstract && interfaceType.IsAssignableFrom(type));
+        }
 
+        private static object CreateInstance(Type type)
+        {
+            return Activator.CreateInstance(type);
+        }
 
         public static Task Log(LogMessage msg)
         {

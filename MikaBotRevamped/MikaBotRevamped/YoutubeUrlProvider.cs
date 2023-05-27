@@ -9,7 +9,6 @@ namespace MikaBotRevamped
 {
     internal interface IYoutubeUrlProvider
     {
-
         List<YoutubeVideoInstance> GetAudioInstancesFromSearch(string searchQuery, int count);
     }
 }
