@@ -1,13 +1,16 @@
 ﻿using Discord;
+using Discord.Audio;
 using Discord.WebSocket;
+using System.Collections;
 
 namespace MikaBotRevamped
 {
-    internal class CommandHandler
+    internal partial class CommandHandler
     {
         private DiscordSocketClient client;
 
-        private HashSet<ulong> registeredGuilds = new();
+        private Dictionary<ulong?, IVoiceChannel> voiceChannelInGuild = new();
+        private Dictionary<ulong?, IAudioClient> audioClientInGuild = new();
 
         public CommandHandler(DiscordSocketClient client)
         {
@@ -26,10 +29,13 @@ namespace MikaBotRevamped
                     await ListRolesOfUserCommand(command);
                     break;
                 case "music":
-                    await MusicCommand(command);
+                    MusicCommand(command);
                     break;
                 case "join":
-                    await JoinVoiceChannel(command);
+                    JoinVoiceChannel(command);
+                    break;
+                case "leave":
+                    LeaveVoiceChannel(command);
                     break;
                 default:
                     await command.FollowupAsync("Oops, something went wrong. (default case)");
@@ -62,10 +68,26 @@ namespace MikaBotRevamped
                 return;
             }
 
-            await command.FollowupAsync($"Joining voice channel {voiceChannel.Name}");
-            await voiceChannel.ConnectAsync();
+            var audioClient = await voiceChannel.ConnectAsync();
+            await command.FollowupAsync($"Joined voice channel '{voiceChannel.Name}'");
+            voiceChannelInGuild.Add(command.GuildId, voiceChannel);
+            audioClientInGuild.Add(command.GuildId, audioClient);
         }
 
+        private async Task LeaveVoiceChannel(SocketSlashCommand command)
+        {
+            if (!voiceChannelInGuild.ContainsKey(command.GuildId))
+            {
+                await command.FollowupAsync("Mika-Bot is currently not in a voice channel.");
+            } else
+            {
+                await voiceChannelInGuild[command.GuildId].DisconnectAsync();
+                await command.FollowupAsync($"Left {voiceChannelInGuild[command.GuildId]}");
+                voiceChannelInGuild.Remove(command.GuildId);
+
+                
+            }
+        }
         private async Task ListRolesOfUserCommand(SocketSlashCommand command)
         {
             var user = command.Data.Options.First().Value as SocketGuildUser;
@@ -81,11 +103,6 @@ namespace MikaBotRevamped
                 .Build();
 
             await command.FollowupAsync(embed: embed);
-        }
-
-        private async Task MusicCommand(SocketSlashCommand command)
-        {
-            await command.FollowupAsync("Music command is not yet implemented.");
         }
     }
 }

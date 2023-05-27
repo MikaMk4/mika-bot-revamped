@@ -47,8 +47,8 @@ namespace MikaBotRevamped
                 .WithName("music")
                 .WithDescription("Play music in a voice channel.")
                 .AddOption(new SlashCommandOptionBuilder()
-                    .WithName("play")
-                    .WithDescription("Play a local song.")
+                    .WithName("queue")
+                    .WithDescription("Queue a song.")
                     .WithType(ApplicationCommandOptionType.SubCommandGroup)
                     .AddOption(new SlashCommandOptionBuilder()
                         .WithName("local")
@@ -81,6 +81,12 @@ namespace MikaBotRevamped
                 .WithDescription("Let Mika-Bot join a voice channel")
                 .AddOption("channel", ApplicationCommandOptionType.Channel, "Voice channel to join.");
             applicationCommands.Add(joinCommand.Build());
+
+            // LEAVE COMMAND
+            var leaveCommand = new SlashCommandBuilder()
+                .WithName("leave")
+                .WithDescription("Let Mika-Bot leave the current voice channel");
+            applicationCommands.Add(leaveCommand.Build());
 
             try
             {
