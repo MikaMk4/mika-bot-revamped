@@ -1,15 +1,18 @@
 ﻿using Discord;
 using Discord.Net;
 using Discord.WebSocket;
+using System.Collections.Concurrent;
 
 namespace MikaBotRevamped
 {
     internal class Bot
     {
-        private DiscordSocketClient client;
-        private string? token;
+        private readonly DiscordSocketClient client;
+        private readonly string? token;
 
-        public Bot(string? token, IYoutubeUrlProvider youtubeUrlProvider)
+        public ConcurrentDictionary<ulong, Guild> guilds = new();
+
+        public Bot(string? token, IEnumerable<ISlashCommand> slashCommands)
         {
             var config = new DiscordSocketConfig
             {
@@ -20,13 +23,22 @@ namespace MikaBotRevamped
 
             this.token = token;
 
-            CommandHandler commandHandler = new CommandHandler(client, youtubeUrlProvider);
-            SelectMenuHandler selectMenuHandler = new SelectMenuHandler(client);
+            CommandHandler commandHandler = new(client, slashCommands);
+            SelectMenuHandler selectMenuHandler = new(client);
+
+            guilds.TryAdd(870773459104436245, new Guild(870773459104436245));
 
             client.Log += Program.Log;
-            client.Ready += RegisterCommands;
-            client.SlashCommandExecuted += commandHandler.ResolveSlashCommand;
+            client.Ready += commandHandler.RegisterCommands;
+            client.SlashCommandExecuted += commandHandler.HandleSlashCommand;
             client.SelectMenuExecuted += selectMenuHandler.ResolveSelectMenu;
+            client.JoinedGuild += RegisterGuild;
+        }
+
+        private async Task RegisterGuild(SocketGuild socketGuild)
+        {
+            var guild = new Guild(socketGuild.Id);
+            guilds.TryAdd(socketGuild.Id, guild);
         }
 
         public async Task RegisterCommands()
@@ -44,51 +56,6 @@ namespace MikaBotRevamped
                 .AddOption("user", ApplicationCommandOptionType.User, "User of which to show roles.", isRequired: true);
             applicationCommands.Add(rolesCommand.Build());
 
-            // MUSIC COMMAND
-            var musicCommand = new SlashCommandBuilder()
-                .WithName("music")
-                .WithDescription("Play music in a voice channel.")
-                .AddOption(new SlashCommandOptionBuilder()
-                    .WithName("queue")
-                    .WithDescription("Queue a song.")
-                    .WithType(ApplicationCommandOptionType.SubCommandGroup)
-                    .AddOption(new SlashCommandOptionBuilder()
-                        .WithName("local")
-                        .WithDescription("Path to the local song.")
-                        .WithType(ApplicationCommandOptionType.SubCommand)
-                        .AddOption(new SlashCommandOptionBuilder()
-                            .WithName("path")
-                            .WithDescription("Path to the local song.")
-                            .WithType(ApplicationCommandOptionType.String)
-                            .WithRequired(true)
-                        )
-                    )
-                )
-                .AddOption(new SlashCommandOptionBuilder()
-                    .WithName("search")
-                    .WithDescription("Search for song.")
-                    .WithType(ApplicationCommandOptionType.SubCommand)
-                    .AddOption(new SlashCommandOptionBuilder()
-                        .WithName("query")
-                        .WithDescription("Search query.")
-                        .WithType(ApplicationCommandOptionType.String)
-                        .WithRequired(true)
-                    )
-                    .AddOption(new SlashCommandOptionBuilder()
-                        .WithName("count")
-                        .WithDescription("Number of results to search for.")
-                        .WithType(ApplicationCommandOptionType.Integer)
-                    )
-                );
-            applicationCommands.Add(musicCommand.Build());
-
-            // JOIN COMMAND
-            var joinCommand = new SlashCommandBuilder()
-                .WithName("join")
-                .WithDescription("Let Mika-Bot join a voice channel")
-                .AddOption("channel", ApplicationCommandOptionType.Channel, "Voice channel to join.");
-            applicationCommands.Add(joinCommand.Build());
-
             // LEAVE COMMAND
             var leaveCommand = new SlashCommandBuilder()
                 .WithName("leave")
@@ -98,7 +65,8 @@ namespace MikaBotRevamped
             try
             {
                 await guild.BulkOverwriteApplicationCommandAsync(applicationCommands.ToArray());
-            } catch (ApplicationCommandException e)
+            }
+            catch (ApplicationCommandException e)
             {
                 await Program.Log(new LogMessage(LogSeverity.Error, e.Source, e.Message));
             }

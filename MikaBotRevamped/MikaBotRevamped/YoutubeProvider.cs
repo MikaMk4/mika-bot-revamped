@@ -4,7 +4,6 @@ using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using YoutubeSearch;
 using Discord;
 using Google.Apis.Services;
 using Google.Apis.YouTube.v3;
