@@ -9,7 +9,7 @@ namespace MikaBotRevamped
         private DiscordSocketClient client;
         private string? token;
 
-        public Bot(string? token)
+        public Bot(string? token, IYoutubeUrlProvider youtubeUrlProvider)
         {
             var config = new DiscordSocketConfig
             {
@@ -20,11 +20,13 @@ namespace MikaBotRevamped
 
             this.token = token;
 
-            CommandHandler commandHandler = new CommandHandler(client);
+            CommandHandler commandHandler = new CommandHandler(client, youtubeUrlProvider);
+            SelectMenuHandler selectMenuHandler = new SelectMenuHandler(client);
 
             client.Log += Program.Log;
             client.Ready += RegisterCommands;
-            client.SlashCommandExecuted += commandHandler.SlashCommandHandler;
+            client.SlashCommandExecuted += commandHandler.ResolveSlashCommand;
+            client.SelectMenuExecuted += selectMenuHandler.ResolveSelectMenu;
         }
 
         public async Task RegisterCommands()
@@ -71,6 +73,11 @@ namespace MikaBotRevamped
                         .WithDescription("Search query.")
                         .WithType(ApplicationCommandOptionType.String)
                         .WithRequired(true)
+                    )
+                    .AddOption(new SlashCommandOptionBuilder()
+                        .WithName("count")
+                        .WithDescription("Number of results to search for.")
+                        .WithType(ApplicationCommandOptionType.Integer)
                     )
                 );
             applicationCommands.Add(musicCommand.Build());

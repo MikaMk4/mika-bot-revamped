@@ -6,6 +6,8 @@ using System.Text;
 using System.Threading.Tasks;
 using YoutubeSearch;
 using Discord;
+using Google.Apis.Services;
+using Google.Apis.YouTube.v3;
 
 namespace MikaBotRevamped
 {
@@ -18,28 +20,50 @@ namespace MikaBotRevamped
 
         public List<YoutubeVideoInstance> GetAudioInstancesFromSearch(string searchQuery, int count)
         {
-            var videoSearch = new VideoSearch();
+            var youtubeService = new YouTubeService(new BaseClientService.Initializer
+            {
+                ApiKey = Environment.GetEnvironmentVariable("YOUTUBE_API_TOKEN", EnvironmentVariableTarget.User)
+            });
 
-            Program.Log(new LogMessage(LogSeverity.Info, "YoutubeProvider", $"Searching for {count} videos with query {searchQuery}"));
-            List<VideoInformation> videoInformations = videoSearch.SearchQuery(searchQuery, count);
+            var searchListRequest = youtubeService.Search.List("snippet");
+            searchListRequest.Q = searchQuery;
+            searchListRequest.MaxResults = count;
+
+            Program.Log(new LogMessage(LogSeverity.Info, "YoutubeProvider", $"Searching for {count} videos with query '{searchQuery}'"));
+            var searchListResponse = searchListRequest.Execute();
 
             List<YoutubeVideoInstance> result = new();
 
-            foreach (VideoInformation videoInformation in videoInformations)
+            foreach (var searchResult in searchListResponse.Items)
             {
-                YoutubeVideoInstance youtubeVideoInstance = new YoutubeVideoInstance();
+                if (searchResult.Id.Kind == "youtube#video")
+                {
+                    YoutubeVideoInstance youtubeVideoInstance = new YoutubeVideoInstance();
 
-                youtubeVideoInstance.Title = videoInformation.Title;
-                youtubeVideoInstance.Description = videoInformation.Description;
-                youtubeVideoInstance.Url = new Uri(videoInformation.Url);
-                youtubeVideoInstance.Thumbnail = new Uri(videoInformation.Thumbnail);
-                //youtubeVideoInstance.Duration = TimeSpan.FromSeconds(videoInformation.Duration);
-                youtubeVideoInstance.ElapsedTime = TimeSpan.Zero;
+                    youtubeVideoInstance.Title = searchResult.Snippet.Title;
 
-                result.Add(youtubeVideoInstance);
+                    Program.Log(LogSeverity.Debug, "YoutubeProvider", $"Resolving data of video '{youtubeVideoInstance.Title}'");
+
+                    youtubeVideoInstance.Description = searchResult.Snippet.Description;
+                    youtubeVideoInstance.ChannelTitle = searchResult.Snippet.ChannelTitle;
+                    youtubeVideoInstance.Url = new Uri($"https://www.youtube.com/watch?v={searchResult.Id.VideoId}");
+                    youtubeVideoInstance.Thumbnail = new Uri(searchResult.Snippet.Thumbnails.Default__.Url);
+                    youtubeVideoInstance.ElapsedTime = TimeSpan.Zero;
+
+                    // Video duration
+                    var videosListRequest = youtubeService.Videos.List("contentDetails");
+                    videosListRequest.Id = searchResult.Id.VideoId;
+                    var videosListResponse = videosListRequest.Execute();
+                    var videoDuration = videosListResponse.Items[0].ContentDetails.Duration;
+                    //var durationTimeSpan = TimeSpan.ParseExact(videoDuration, "'PT'm'M's'S'", null);
+
+                    //youtubeVideoInstance.Duration = durationTimeSpan;
+
+                    result.Add(youtubeVideoInstance);
+                }
             }
 
-            Program.Log(new LogMessage(LogSeverity.Info, "YoutubeProvider", $"Found {result.Count} videos with query {searchQuery}"));
+            Program.Log(LogSeverity.Info, "YoutubeProvider", $"Found {result.Count} videos with query '{searchQuery}'");
             return result;
         }
     }

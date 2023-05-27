@@ -7,42 +7,6 @@ namespace MikaBotRevamped
 {
     internal partial class CommandHandler
     {
-        private DiscordSocketClient client;
-
-        private Dictionary<ulong?, IVoiceChannel> voiceChannelInGuild = new();
-        private Dictionary<ulong?, IAudioClient> audioClientInGuild = new();
-
-        public CommandHandler(DiscordSocketClient client)
-        {
-            this.client = client;
-        }
-
-        public async Task SlashCommandHandler(SocketSlashCommand command)
-        {
-            // Neue Commands hier hinzufügen
-
-            await command.DeferAsync();
-
-            switch (command.Data.Name)
-            {
-                case "roles":
-                    await ListRolesOfUserCommand(command);
-                    break;
-                case "music":
-                    MusicCommand(command);
-                    break;
-                case "join":
-                    JoinVoiceChannel(command);
-                    break;
-                case "leave":
-                    LeaveVoiceChannel(command);
-                    break;
-                default:
-                    await command.FollowupAsync("Oops, something went wrong. (default case)");
-                    break;
-            }
-        }
-
         private async Task JoinVoiceChannel(SocketSlashCommand command)
         {
             IVoiceChannel voiceChannel;
