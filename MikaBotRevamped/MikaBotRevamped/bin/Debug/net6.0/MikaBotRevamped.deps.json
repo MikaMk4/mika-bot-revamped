@@ -9,6 +9,7 @@
       "MikaBotRevamped/1.0.0": {
         "dependencies": {
           "Discord.Net": "3.10.0",
+          "YoutubeSearch.dll": "1.1.0",
           "libsodium": "1.0.18.4"
         },
         "runtime": {
@@ -199,7 +200,15 @@
           }
         }
       },
-      "System.ValueTuple/4.5.0": {}
+      "System.ValueTuple/4.5.0": {},
+      "YoutubeSearch.dll/1.1.0": {
+        "runtime": {
+          "lib/YoutubeSearch.dll": {
+            "assemblyVersion": "0.1.1.0",
+            "fileVersion": "0.1.1.0"
+          }
+        }
+      }
     }
   },
   "libraries": {
@@ -312,6 +321,13 @@
       "sha512": "sha512-okurQJO6NRE/apDIP23ajJ0hpiNmJ+f0BwOlB/cSqTLQlw5upkf+5+96+iG2Jw40G1fCVCyPz/FhIABUjMR+RQ==",
       "path": "system.valuetuple/4.5.0",
       "hashPath": "system.valuetuple.4.5.0.nupkg.sha512"
+    },
+    "YoutubeSearch.dll/1.1.0": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HIewHh+oCd0kz/LJr/uEUl5W5zOtCTtccQIBE5DlCt9AG+7C9ibtm12ix8YW/qUV0hBttDpHAJ0PAAS+FoRP/Q==",
+      "path": "youtubesearch.dll/1.1.0",
+      "hashPath": "youtubesearch.dll.1.1.0.nupkg.sha512"
     }
   }
 }

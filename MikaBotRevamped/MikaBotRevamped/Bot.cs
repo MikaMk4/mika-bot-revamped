@@ -22,14 +22,14 @@ namespace MikaBotRevamped
 
             CommandHandler commandHandler = new CommandHandler(client);
 
-            client.Log += Log;
+            client.Log += Program.Log;
             client.Ready += RegisterCommands;
             client.SlashCommandExecuted += commandHandler.SlashCommandHandler;
         }
 
         public async Task RegisterCommands()
         {
-            await Log(new LogMessage(LogSeverity.Info, "Bot", "Registering Commands"));
+            await Program.Log(new LogMessage(LogSeverity.Info, "Bot", "Registering Commands"));
 
             var guild = client.GetGuild(870773459104436245); // Mondstadt Server
 
@@ -60,9 +60,19 @@ namespace MikaBotRevamped
                             .WithType(ApplicationCommandOptionType.String)
                             .WithRequired(true)
                         )
-                        )
                     )
-                ;
+                )
+                .AddOption(new SlashCommandOptionBuilder()
+                    .WithName("search")
+                    .WithDescription("Search for song.")
+                    .WithType(ApplicationCommandOptionType.SubCommand)
+                    .AddOption(new SlashCommandOptionBuilder()
+                        .WithName("query")
+                        .WithDescription("Search query.")
+                        .WithType(ApplicationCommandOptionType.String)
+                        .WithRequired(true)
+                    )
+                );
             applicationCommands.Add(musicCommand.Build());
 
             // JOIN COMMAND
@@ -77,7 +87,7 @@ namespace MikaBotRevamped
                 await guild.BulkOverwriteApplicationCommandAsync(applicationCommands.ToArray());
             } catch (ApplicationCommandException e)
             {
-                await Log(new LogMessage(LogSeverity.Error, e.Source, e.Message));
+                await Program.Log(new LogMessage(LogSeverity.Error, e.Source, e.Message));
             }
         }
 
@@ -87,12 +97,6 @@ namespace MikaBotRevamped
             await client.StartAsync();
 
             await Task.Delay(-1);
-        }
-
-        public Task Log(LogMessage msg)
-        {
-            Console.WriteLine(msg.ToString());
-            return Task.CompletedTask;
         }
     }
 }

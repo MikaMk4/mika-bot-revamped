@@ -10,6 +10,7 @@
   <ItemGroup>
     <PackageReference Include="Discord.Net" Version="3.10.0" />
     <PackageReference Include="libsodium" Version="1.0.18.4" />
+    <PackageReference Include="YoutubeSearch.dll" Version="1.1.0" />
   </ItemGroup>
 
 </Project>
