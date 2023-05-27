@@ -10,7 +10,7 @@ namespace MikaBotRevamped
     internal class MusicPlayer : IMusicPlayer
     {
         private IVoiceChannel voiceChannel;
-        private Queue<AudioInstance> queue;
+        private Queue<YoutubeVideoInstance> queue;
 
         public MusicPlayer(IVoiceChannel voiceChannel)
         {

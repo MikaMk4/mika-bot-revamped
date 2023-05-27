@@ -9,7 +9,7 @@ namespace MikaBotRevamped
         private DiscordSocketClient client;
         private string? token;
 
-        public Bot(string? token)
+        public Bot(string? token, IYoutubeUrlProvider youtubeUrlProvider)
         {
             var config = new DiscordSocketConfig
             {
@@ -20,16 +20,18 @@ namespace MikaBotRevamped
 
             this.token = token;
 
-            CommandHandler commandHandler = new CommandHandler(client);
+            CommandHandler commandHandler = new CommandHandler(client, youtubeUrlProvider);
+            SelectMenuHandler selectMenuHandler = new SelectMenuHandler(client);
 
-            client.Log += Log;
+            client.Log += Program.Log;
             client.Ready += RegisterCommands;
-            client.SlashCommandExecuted += commandHandler.SlashCommandHandler;
+            client.SlashCommandExecuted += commandHandler.ResolveSlashCommand;
+            client.SelectMenuExecuted += selectMenuHandler.ResolveSelectMenu;
         }
 
         public async Task RegisterCommands()
         {
-            await Log(new LogMessage(LogSeverity.Info, "Bot", "Registering Commands"));
+            await Program.Log(new LogMessage(LogSeverity.Info, "Bot", "Registering Commands"));
 
             var guild = client.GetGuild(870773459104436245); // Mondstadt Server
 
@@ -47,8 +49,8 @@ namespace MikaBotRevamped
                 .WithName("music")
                 .WithDescription("Play music in a voice channel.")
                 .AddOption(new SlashCommandOptionBuilder()
-                    .WithName("play")
-                    .WithDescription("Play a local song.")
+                    .WithName("queue")
+                    .WithDescription("Queue a song.")
                     .WithType(ApplicationCommandOptionType.SubCommandGroup)
                     .AddOption(new SlashCommandOptionBuilder()
                         .WithName("local")
@@ -60,9 +62,24 @@ namespace MikaBotRevamped
                             .WithType(ApplicationCommandOptionType.String)
                             .WithRequired(true)
                         )
-                        )
                     )
-                ;
+                )
+                .AddOption(new SlashCommandOptionBuilder()
+                    .WithName("search")
+                    .WithDescription("Search for song.")
+                    .WithType(ApplicationCommandOptionType.SubCommand)
+                    .AddOption(new SlashCommandOptionBuilder()
+                        .WithName("query")
+                        .WithDescription("Search query.")
+                        .WithType(ApplicationCommandOptionType.String)
+                        .WithRequired(true)
+                    )
+                    .AddOption(new SlashCommandOptionBuilder()
+                        .WithName("count")
+                        .WithDescription("Number of results to search for.")
+                        .WithType(ApplicationCommandOptionType.Integer)
+                    )
+                );
             applicationCommands.Add(musicCommand.Build());
 
             // JOIN COMMAND
@@ -72,12 +89,18 @@ namespace MikaBotRevamped
                 .AddOption("channel", ApplicationCommandOptionType.Channel, "Voice channel to join.");
             applicationCommands.Add(joinCommand.Build());
 
+            // LEAVE COMMAND
+            var leaveCommand = new SlashCommandBuilder()
+                .WithName("leave")
+                .WithDescription("Let Mika-Bot leave the current voice channel");
+            applicationCommands.Add(leaveCommand.Build());
+
             try
             {
                 await guild.BulkOverwriteApplicationCommandAsync(applicationCommands.ToArray());
             } catch (ApplicationCommandException e)
             {
-                await Log(new LogMessage(LogSeverity.Error, e.Source, e.Message));
+                await Program.Log(new LogMessage(LogSeverity.Error, e.Source, e.Message));
             }
         }
 
@@ -87,12 +110,6 @@ namespace MikaBotRevamped
             await client.StartAsync();
 
             await Task.Delay(-1);
-        }
-
-        public Task Log(LogMessage msg)
-        {
-            Console.WriteLine(msg.ToString());
-            return Task.CompletedTask;
         }
     }
 }
