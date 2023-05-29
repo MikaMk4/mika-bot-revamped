@@ -41,6 +41,7 @@ namespace MikaBotRevamped.Commands
                 ComponentBuilder componentBuilder = new ComponentBuilder();
                 componentBuilder.WithButton(buttonBuilder);
 
+                await command.DeferAsync();
                 Program.bot.Users.Users[command.User.Id].RestFollowupMessage = await command.FollowupAsync(preText, embed: embed, components: componentBuilder.Build());
             }
             else if (subCommand == "qualities")
@@ -58,7 +59,7 @@ namespace MikaBotRevamped.Commands
                     embeds.Add(embedBuilder.Build());
                 }
 
-                await command.FollowupAsync(embeds: embeds.ToArray());
+                await command.RespondAsync(embeds: embeds.ToArray());
             } else if (subCommand == "list")
             {
                 var user = command.User;
@@ -94,7 +95,7 @@ namespace MikaBotRevamped.Commands
 
                 if (user == null)
                 {
-                    await command.FollowupAsync("Oops, something went wrong. (user == null)");
+                    await command.RespondAsync("Oops, something went wrong. (user == null)");
                     Program.Log(LogSeverity.Error, "GachaCommand", "user was null");
                     return;
                 }
@@ -103,7 +104,7 @@ namespace MikaBotRevamped.Commands
                 var test2 = Program.bot.Users.Users.ContainsKey(user.Id);
                 if (!Program.bot.Users.Users.TryGetValue(user.Id, out _))
                 {
-                    await command.FollowupAsync($"{user.Username} doesn't have any Waifus yet!");
+                    await command.RespondAsync($"{user.Username} doesn't have any Waifus yet!");
                     return;
                 }
 
@@ -123,7 +124,7 @@ namespace MikaBotRevamped.Commands
                     embedBuilder.AddField(waifu.Name, $"{waifu.Quality} | #{waifu.Id}");
                 }
 
-                command.FollowupAsync(embed: embedBuilder.Build());
+                command.RespondAsync(embed: embedBuilder.Build());
             } else if (subCommand == "view")
             {
                 var waifuIdLong = command.Data.Options.First().Options.First().Value as long?;
@@ -131,7 +132,7 @@ namespace MikaBotRevamped.Commands
 
                 if (waifuId == null)
                 {
-                    command.FollowupAsync("Oops, something went wrong. (waifuId == null)");
+                    command.RespondAsync("Oops, something went wrong. (waifuId == null)");
                     Program.Log(LogSeverity.Error, "GachaCommand", "waifuId was null");
                     return;
                 }
@@ -140,7 +141,7 @@ namespace MikaBotRevamped.Commands
 
                 if (user == null || waifu == null)
                 {
-                    command.FollowupAsync("Oops, something went wrong. (user == null || waifu == null)");
+                    command.RespondAsync("Oops, something went wrong. (user == null || waifu == null)");
                     Program.Log(LogSeverity.Error, "GachaCommand", "user or waifu was null");
                     return;
                 }
@@ -154,20 +155,20 @@ namespace MikaBotRevamped.Commands
                 embedBuilder.AddField("Id:", waifu.Id);
                 embedBuilder.ImageUrl = waifu.ImageUrl;
 
-                command.FollowupAsync(embed: embedBuilder.Build());
+                command.RespondAsync(embed: embedBuilder.Build());
             } else if (subCommand == "pity")
             {
                 var user = command.User as SocketUser;
 
                 if (!Program.bot.Users.Users.TryGetValue(user.Id, out _))
                 {
-                    await command.FollowupAsync($"{user.Username} didn't play the gacha yet.");
+                    await command.RespondAsync($"{user.Username} didn't play the gacha yet.");
                     return;
                 }
 
                 var pity = Program.bot.Users.Users[user.Id].PityCount;
 
-                command.FollowupAsync($"Your Pity Count: {pity}");
+                command.RespondAsync($"Your Pity Count: {pity}");
             }
         }
 

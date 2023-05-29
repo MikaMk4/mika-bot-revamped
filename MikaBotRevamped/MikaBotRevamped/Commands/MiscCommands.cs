@@ -18,7 +18,7 @@ namespace MikaBotRevamped
                     voiceChannel = command.Data.Options.First().Value as IVoiceChannel;
                 } else
                 {
-                    await command.FollowupAsync("Can only join voice channels.");
+                    await command.RespondAsync("Can only join voice channels.");
                     return;
                 }
             } else
@@ -28,12 +28,12 @@ namespace MikaBotRevamped
 
             if (voiceChannel == null)
             {
-                await command.FollowupAsync("You are not in a voice channel.");
+                await command.RespondAsync("You are not in a voice channel.");
                 return;
             }
 
             var audioClient = await voiceChannel.ConnectAsync();
-            await command.FollowupAsync($"Joined voice channel '{voiceChannel.Name}'");
+            await command.RespondAsync($"Joined voice channel '{voiceChannel.Name}'");
             voiceChannelInGuild.Add(command.GuildId, voiceChannel);
             audioClientInGuild.Add(command.GuildId, audioClient);
         }
@@ -42,11 +42,11 @@ namespace MikaBotRevamped
         {
             if (!voiceChannelInGuild.ContainsKey(command.GuildId))
             {
-                await command.FollowupAsync("Mika-Bot is currently not in a voice channel.");
+                await command.RespondAsync("Mika-Bot is currently not in a voice channel.");
             } else
             {
                 await voiceChannelInGuild[command.GuildId].DisconnectAsync();
-                await command.FollowupAsync($"Left {voiceChannelInGuild[command.GuildId]}");
+                await command.RespondAsync($"Left {voiceChannelInGuild[command.GuildId]}");
                 voiceChannelInGuild.Remove(command.GuildId);
 
                 
@@ -66,7 +66,7 @@ namespace MikaBotRevamped
                 .WithCurrentTimestamp()
                 .Build();
 
-            await command.FollowupAsync(embed: embed);
+            await command.RespondAsync(embed: embed);
         }
     }
 }

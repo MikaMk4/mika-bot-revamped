@@ -28,7 +28,7 @@ namespace MikaBotRevamped.Commands
                 }
                 else
                 {
-                    await command.FollowupAsync("Can only join voice channels.");
+                    await command.RespondAsync("Can only join voice channels.");
                     return;
                 }
             }
@@ -39,12 +39,12 @@ namespace MikaBotRevamped.Commands
 
             if (voiceChannel == null)
             {
-                await command.FollowupAsync("You are not in a voice channel.");
+                await command.RespondAsync("You are not in a voice channel.");
                 return;
             }
 
             var audioClient = await voiceChannel.ConnectAsync();
-            await command.FollowupAsync($"Joined voice channel '{voiceChannel.Name}'");
+            await command.RespondAsync($"Joined voice channel '{voiceChannel.Name}'");
             var guild = Program.bot.guilds[(ulong)command.GuildId];
             guild.BotVoiceChannel = voiceChannel;
             guild.BotAudioClient = audioClient;

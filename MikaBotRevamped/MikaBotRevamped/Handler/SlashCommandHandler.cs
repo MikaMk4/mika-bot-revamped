@@ -18,10 +18,9 @@ namespace MikaBotRevamped
         private Dictionary<ulong?, IVoiceChannel> voiceChannelInGuild = new();
         private Dictionary<ulong?, IAudioClient> audioClientInGuild = new();
 
-        public SlashCommandHandler(DiscordSocketClient client, IEnumerable<ISlashCommand> commands)
+        public SlashCommandHandler(DiscordSocketClient client)
         {
             this.client = client;
-            slashCommands.AddRange(commands);
         }
 
         public async Task HandleSlashCommand(SocketSlashCommand command)
@@ -34,8 +33,6 @@ namespace MikaBotRevamped
                 await Program.Log(LogSeverity.Error, "CommandHandler","SlashCommand not found: " + command.CommandName);
                 return;
             }
-
-            await command.DeferAsync();
 
             if (slashCommand.AsyncMode)
             {
@@ -60,6 +57,11 @@ namespace MikaBotRevamped
         public void AddSlashCommand(ISlashCommand slashCommand)
         {
             slashCommands.Add(slashCommand);
+        }
+
+        public void ClearSlashCommands()
+        {
+            slashCommands.Clear();
         }
     }
 }

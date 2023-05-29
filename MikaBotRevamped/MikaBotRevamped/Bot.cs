@@ -15,7 +15,13 @@ namespace MikaBotRevamped
         public ConcurrentDictionary<ulong, Guild> guilds = new();
         public readonly UserDictionary Users;
 
-        public Bot(string? token, IEnumerable<ISlashCommand> slashCommands, IEnumerable<IButton> buttons)
+        public SlashCommandHandler SlashCommandHandler { get; }
+        private ButtonHandler ButtonHandler { get; }
+        private ModalHandler ModalHandler { get; }
+        private SelectMenuHandler SelectMenuHandler { get; }
+
+
+        public Bot(string? token, IEnumerable<IButton> buttons)
         {
             var config = new DiscordSocketConfig
             {
@@ -26,10 +32,10 @@ namespace MikaBotRevamped
 
             this.token = token;
 
-            SlashCommandHandler commandHandler = new(client, slashCommands);
-            ButtonHandler buttonHandler = new(buttons);
-            ModalHandler modalHandler = new();
-            SelectMenuHandler selectMenuHandler = new(client);
+            SlashCommandHandler = new(client);
+            ButtonHandler = new(buttons);
+            ModalHandler = new();
+            SelectMenuHandler = new(client);
 
             Users = new UserDictionary(new JsonPersistenceProvider("Users.json"));
             Users.Load().Wait();
@@ -37,19 +43,19 @@ namespace MikaBotRevamped
             guilds.TryAdd(870773459104436245, new Guild(870773459104436245));
 
             client.Log += Program.Log;
-            client.Ready += commandHandler.RegisterCommands;
+            client.Ready += SlashCommandHandler.RegisterCommands;
             client.Ready += Ready;
-            client.SlashCommandExecuted += commandHandler.HandleSlashCommand;
-            client.SelectMenuExecuted += selectMenuHandler.ResolveSelectMenu;
-            client.ButtonExecuted += buttonHandler.HandleButton;
-            client.ModalSubmitted += modalHandler.HandleModal;
+            client.SlashCommandExecuted += SlashCommandHandler.HandleSlashCommand;
+            client.SelectMenuExecuted += SelectMenuHandler.ResolveSelectMenu;
+            client.ButtonExecuted += ButtonHandler.HandleButton;
+            client.ModalSubmitted += ModalHandler.HandleModal;
             client.JoinedGuild += RegisterGuild;
         }
 
         private Task Ready()
         {
-            //client.SetGameAsync("Gacha Games!", type: ActivityType.Competing);
-            client.SetActivityAsync(new Game("Gacha Games!", ActivityType.Competing));
+            Program.RegisterAllSlashCommands();
+            client.SetGameAsync("Gacha Games!", type: ActivityType.Competing);
             return Task.CompletedTask;
         }
 

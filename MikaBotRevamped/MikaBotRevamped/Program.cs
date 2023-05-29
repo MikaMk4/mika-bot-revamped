@@ -6,12 +6,17 @@ using MikaBotRevamped.Handler;
 using Newtonsoft.Json;
 using Pastel;
 using System.Reflection;
+using System.Runtime.CompilerServices;
 
 namespace MikaBotRevamped
 {
     class Program
     {
         public static Bot bot;
+
+        public static readonly ulong MikaUid = 452415473687068672;
+
+        private static DependencyProvider dependencyProvider = new();
 
         public static Task Main(string[] args) => new Program().MainAsync();
 
@@ -22,29 +27,23 @@ namespace MikaBotRevamped
             GachaProvider gachaProvider = new();
 
             // Dependency Injection gedöns
-            DependencyProvider dependencyProvider = new();
             dependencyProvider.RegisterDependency<IYoutubeUrlProvider>(youtubeProvider);
             dependencyProvider.RegisterDependency<IYoutubeStreamProvider>(youtubeProvider);
             dependencyProvider.RegisterDependency<IWaifuProvider>(waifuProvider);
             dependencyProvider.RegisterDependency<IGachaProvider>(gachaProvider);
-
-            // Hol alle Klassen die ISlashCommand implementieren
-            var slashCommandTypes = GetImplementingTypes(typeof(ISlashCommand));
-            // Instanziere diese Klassen und pack sie in eine Liste
-            var slashCommands = slashCommandTypes.Select(CreateInstance).Cast<ISlashCommand>().ToList();
+            dependencyProvider.RegisterDependency<IDependencyProvider>(dependencyProvider);
 
             // Hol alle Klassen die IButton implementieren
             var buttonTypes = GetImplementingTypes(typeof(IButton));
             // Instanziere diese Klassen und pack sie in eine Liste
             var buttons = buttonTypes.Select(CreateInstance).Cast<IButton>().ToList();
 
-            // Setze die Dependencies für die SlashCommands und Buttons
-            slashCommands.ForEach(slashCommand => slashCommand.SetDependencies(dependencyProvider));
+            // Setze die Dependencies für die IButtons
             buttons.ForEach(button => button.SetDependencies(dependencyProvider));
 
             var token = Environment.GetEnvironmentVariable("DISCORD_API_TOKEN", EnvironmentVariableTarget.User);
 
-            bot = new(token, slashCommands, buttons);
+            bot = new(token, buttons);
             try
             {
                 await bot.Start();
@@ -55,13 +54,35 @@ namespace MikaBotRevamped
             }
         }
 
-        private static IEnumerable<Type> GetImplementingTypes(Type interfaceType)
+        public async static Task RegisterAllSlashCommands()
+        {
+            Log(LogSeverity.Info, "Program", "Registering all slash commands");
+
+            bot.SlashCommandHandler.ClearSlashCommands();
+
+            // Hol alle Klassen die ISlashCommand implementieren
+            var slashCommandTypes = GetImplementingTypes(typeof(ISlashCommand));
+            // Instanziere diese Klassen und pack sie in eine Liste
+            var slashCommands = slashCommandTypes.Select(CreateInstance).Cast<ISlashCommand>().ToList();
+
+            // Setze die Dependencies für die SlashCommands und Buttons
+            slashCommands.ForEach(slashCommand => slashCommand.SetDependencies(dependencyProvider));
+
+            foreach (var slashCommand in slashCommands)
+            {
+                bot.SlashCommandHandler.AddSlashCommand(slashCommand);
+            }
+
+            await bot.SlashCommandHandler.RegisterCommands();
+        }
+
+        public static IEnumerable<Type> GetImplementingTypes(Type interfaceType)
         {
             return Assembly.GetExecutingAssembly().GetTypes()
                 .Where(type => type.IsClass && !type.IsAbstract && interfaceType.IsAssignableFrom(type));
         }
 
-        private static object CreateInstance(Type type)
+        public static object CreateInstance(Type type)
         {
             return Activator.CreateInstance(type);
         }

@@ -30,14 +30,14 @@ namespace MikaBotRevamped.Commands
                     embedBuilder.Title = "Here, have a waifu.";
                     embedBuilder.ImageUrl = await waifuProvider.GetRandomWaifuImageUrl();
                     embedBuilder.Color = Color.Green;
-                    await command.FollowupAsync(embed: embedBuilder.Build());
+                    await command.RespondAsync(embed: embedBuilder.Build());
                 }
                 else if (subSubCommand == "tag")
                 {
                     var tag = command.Data.Options.First().Options.First().Options.First().Value as string;
                     if (tag == null)
                     {
-                        await command.FollowupAsync("Oops, something went wrong. (tag)");
+                        await command.RespondAsync("Oops, something went wrong. (tag)");
                         await Program.Log(LogSeverity.Error, "WaifuCommand", "tag is null");
                         return;
                     }
@@ -45,7 +45,7 @@ namespace MikaBotRevamped.Commands
                     embedBuilder.Title = "Here, have a waifu.";
                     embedBuilder.ImageUrl = await waifuProvider.GetWaifuImageUrlByTag(tag);
                     embedBuilder.Color = Color.Green;
-                    await command.FollowupAsync(embed: embedBuilder.Build());
+                    await command.RespondAsync(embed: embedBuilder.Build());
                 }
             }
         }

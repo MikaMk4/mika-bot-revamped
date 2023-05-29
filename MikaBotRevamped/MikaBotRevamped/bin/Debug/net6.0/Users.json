@@ -12,7 +12,7 @@
   },
   "452415473687068672": {
     "Uid": 452415473687068672,
-    "PityCount": 0,
+    "PityCount": 18,
     "Waifus": [
       {
         "Name": "Formidable",
@@ -405,13 +405,32 @@
         "Tags": null,
         "ImageUrl": "https://i.waifu.pics/vzh9Dhm.jpg",
         "Quality": 5
+      },
+      {
+        "Name": "Pyra",
+        "Id": 393,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/anKsYF2.png",
+        "Quality": 2
+      },
+      {
+        "Name": "test",
+        "Id": 400,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/2771.jpeg",
+        "Quality": 2
       }
     ],
-    "UnclaimedWaifus": []
+    "UnclaimedWaifus": [
+      {
+        "ImageUrl": "https://i.waifu.pics/jiHthY6.png",
+        "Quality": 0
+      }
+    ]
   },
   "460090800362225665": {
     "Uid": 460090800362225665,
-    "PityCount": 60,
+    "PityCount": 7,
     "Waifus": [
       {
         "Name": "Sirno",
@@ -1707,12 +1726,95 @@
         "Tags": null,
         "ImageUrl": "https://i.waifu.pics/8DSLwjr.png",
         "Quality": 1
+      },
+      {
+        "Name": "yor",
+        "Id": 394,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/7656.jpg",
+        "Quality": 2
+      },
+      {
+        "Name": "kafkaa",
+        "Id": 395,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/8098.jpg",
+        "Quality": 0
+      },
+      {
+        "Name": "theresa",
+        "Id": 396,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/eULPvem.png",
+        "Quality": 5
+      },
+      {
+        "Name": "yor",
+        "Id": 397,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/7692.png",
+        "Quality": 0
+      },
+      {
+        "Name": "faruzan",
+        "Id": 398,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/507.jpeg",
+        "Quality": 3
+      },
+      {
+        "Name": "hell trio",
+        "Id": 399,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/1131.jpeg",
+        "Quality": 1
+      },
+      {
+        "Name": "raphtrio",
+        "Id": 401,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/195.jpeg",
+        "Quality": 0
+      },
+      {
+        "Name": "cocomilk",
+        "Id": 402,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/BpVeHaZ.jpg",
+        "Quality": 3
+      },
+      {
+        "Name": "babara no boobs",
+        "Id": 403,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/1762.png",
+        "Quality": 0
+      },
+      {
+        "Name": "HAtsune miku",
+        "Id": 447,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/onhjGAS.jpg",
+        "Quality": 5
+      },
+      {
+        "Name": "keqing",
+        "Id": 449,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/s1DLRKM.png",
+        "Quality": 3
       }
     ],
+    "UnclaimedWaifus": []
+  },
+  "317924843632852993": {
+    "Uid": 317924843632852993,
+    "PityCount": 1,
+    "Waifus": [],
     "UnclaimedWaifus": [
       {
-        "ImageUrl": "https://i.waifu.pics/KcrOIYV.jpg",
-        "Quality": 0
+        "ImageUrl": "https://cdn.waifu.im/7364.jpg",
+        "Quality": 2
       }
     ]
   },
@@ -1947,7 +2049,7 @@
   },
   "399132778920411136": {
     "Uid": 399132778920411136,
-    "PityCount": 0,
+    "PityCount": 4,
     "Waifus": [
       {
         "Name": "Steve",
@@ -2788,6 +2890,314 @@
         "Tags": null,
         "ImageUrl": "https://i.waifu.pics/E4jszNV.jpeg",
         "Quality": 5
+      },
+      {
+        "Name": "Mona",
+        "Id": 404,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/MGCFWn1.jpg",
+        "Quality": 1
+      },
+      {
+        "Name": "Epic Thing",
+        "Id": 405,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/1102.jpg",
+        "Quality": 3
+      },
+      {
+        "Name": "Goat",
+        "Id": 406,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/~FptP42.jpeg",
+        "Quality": 1
+      },
+      {
+        "Name": "Keqing",
+        "Id": 407,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/DxxMnby.jpg",
+        "Quality": 4
+      },
+      {
+        "Name": "Lucina",
+        "Id": 408,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/7594.jpg",
+        "Quality": 0
+      },
+      {
+        "Name": "02",
+        "Id": 409,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/gnpc_Lr.jpeg",
+        "Quality": 0
+      },
+      {
+        "Name": "Shinobu",
+        "Id": 410,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/470.jpeg",
+        "Quality": 1
+      },
+      {
+        "Name": "Useless",
+        "Id": 411,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/cuwUkva.jpg",
+        "Quality": 1
+      },
+      {
+        "Name": "Goat",
+        "Id": 412,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/~FptP42.jpeg",
+        "Quality": 2
+      },
+      {
+        "Name": "Weakness",
+        "Id": 413,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/wlvCPrF.jpg",
+        "Quality": 0
+      },
+      {
+        "Name": "Eula",
+        "Id": 414,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/7301.jpg",
+        "Quality": 4
+      },
+      {
+        "Name": "02",
+        "Id": 415,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/3400.png",
+        "Quality": 2
+      },
+      {
+        "Name": "Steve",
+        "Id": 416,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/aD7t0Bc.jpg",
+        "Quality": 0
+      },
+      {
+        "Name": "Yor Briar",
+        "Id": 417,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/8006.jpg",
+        "Quality": 1
+      },
+      {
+        "Name": "Epic Thing",
+        "Id": 418,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/7231.png",
+        "Quality": 3
+      },
+      {
+        "Name": "Raiden",
+        "Id": 419,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/6798.jpg",
+        "Quality": 2
+      },
+      {
+        "Name": "Epic Thing",
+        "Id": 420,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/7477.png",
+        "Quality": 3
+      },
+      {
+        "Name": "Mythic Thing",
+        "Id": 421,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/E4jszNV.jpeg",
+        "Quality": 5
+      },
+      {
+        "Name": "Chika",
+        "Id": 422,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/VxoRcT4.jpeg",
+        "Quality": 0
+      },
+      {
+        "Name": "Roxy",
+        "Id": 423,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/07eNAFm.jpg",
+        "Quality": 0
+      },
+      {
+        "Name": "Roxy",
+        "Id": 424,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/O4gqsyo.jpg",
+        "Quality": 0
+      },
+      {
+        "Name": "Tentacle H*ntai",
+        "Id": 425,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/4623.jpeg",
+        "Quality": 1
+      },
+      {
+        "Name": "Maki",
+        "Id": 426,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/3667.png",
+        "Quality": 0
+      },
+      {
+        "Name": "Weird lookin Dog",
+        "Id": 427,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/rUfJc7w.jpg",
+        "Quality": 0
+      },
+      {
+        "Name": "Weird lookin Dog",
+        "Id": 428,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/rUfJc7w.jpg",
+        "Quality": 0
+      },
+      {
+        "Name": "Legendary Thing",
+        "Id": 429,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/7227.jpg",
+        "Quality": 4
+      },
+      {
+        "Name": "Chika",
+        "Id": 430,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/_NBeyLj.png",
+        "Quality": 0
+      },
+      {
+        "Name": "Epic Thing",
+        "Id": 431,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/qPWyHQ0.png",
+        "Quality": 3
+      },
+      {
+        "Name": "Diglet trio",
+        "Id": 432,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/CoHIzDo.jpg",
+        "Quality": 1
+      },
+      {
+        "Name": "Mythic thing",
+        "Id": 433,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/6694.jpeg",
+        "Quality": 5
+      },
+      {
+        "Name": "Pyra",
+        "Id": 434,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/anKsYF2.png",
+        "Quality": 0
+      },
+      {
+        "Name": "Epic Thing",
+        "Id": 435,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/~Ixa5M9.png",
+        "Quality": 3
+      },
+      {
+        "Name": "MOna",
+        "Id": 436,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/8pUgW9x.png",
+        "Quality": 1
+      },
+      {
+        "Name": "Tentacle H*ntai",
+        "Id": 437,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/4623.jpeg",
+        "Quality": 1
+      },
+      {
+        "Name": "Goat",
+        "Id": 438,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/3x~ovC6.jpg",
+        "Quality": 2
+      },
+      {
+        "Name": "Raiden",
+        "Id": 439,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/8053.jpg",
+        "Quality": 0
+      },
+      {
+        "Name": "Kaguya",
+        "Id": 440,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/2343.jpg",
+        "Quality": 1
+      },
+      {
+        "Name": "Yor Briar",
+        "Id": 441,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/7665.png",
+        "Quality": 0
+      },
+      {
+        "Name": "Weird lookin Dog",
+        "Id": 442,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/8DSLwjr.png",
+        "Quality": 1
+      },
+      {
+        "Name": "Nezuko",
+        "Id": 443,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/204.jpeg",
+        "Quality": 0
+      },
+      {
+        "Name": "Legendary Thing",
+        "Id": 444,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/kTlbrRO.png",
+        "Quality": 4
+      },
+      {
+        "Name": "Roxy",
+        "Id": 445,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/ynInTFV.jpg",
+        "Quality": 1
+      },
+      {
+        "Name": "Keqing Mythic",
+        "Id": 446,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/HNEg0-Q.png",
+        "Quality": 5
+      },
+      {
+        "Name": "Keqing",
+        "Id": 448,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/2212.png",
+        "Quality": 1
       }
     ],
     "UnclaimedWaifus": []

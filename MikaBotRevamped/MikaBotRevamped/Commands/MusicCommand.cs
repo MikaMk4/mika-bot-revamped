@@ -36,7 +36,7 @@ namespace MikaBotRevamped.Commands
                 var count = command.Data.Options.First().Options.Last().Value as int? ?? 5;
                 if (searchQuery == null)
                 {
-                    await command.FollowupAsync("Oops, something went wrong. (search)");
+                    await command.RespondAsync("Oops, something went wrong. (search)");
                     await Program.Log(LogSeverity.Error, "MusicCommand", "searchQuery is null");
                     return;
                 }
@@ -66,6 +66,7 @@ namespace MikaBotRevamped.Commands
                 var componentBuilder = new ComponentBuilder()
                     .WithSelectMenu(selectMenuBuilder);
 
+                await command.DeferAsync();
                 var followupMessage = await command.FollowupAsync(embed: embedBuilder.Build(), components: componentBuilder.Build());
                 var user = new GuildUser(command.User.Id);
                 user.FollowupMessage = followupMessage;
@@ -77,7 +78,7 @@ namespace MikaBotRevamped.Commands
                 var url = command.Data.Options.First().Options.First().Value as string;
                 if (url == null)
                 {
-                    await command.FollowupAsync("Oops, something went wrong. (url)");
+                    await command.RespondAsync("Oops, something went wrong. (url)");
                     await Program.Log(LogSeverity.Error, "MusicCommand", "url is null");
                     return;
                 }
@@ -88,7 +89,7 @@ namespace MikaBotRevamped.Commands
                 embedBuilder.Title = "Chosen Song";
                 embedBuilder.Description = $"You have chosen the song: {youtubeVideoInstance.Title}";
                 embedBuilder.Color = Color.Green;
-                await command.FollowupAsync(embed: embedBuilder.Build());
+                await command.RespondAsync(embed: embedBuilder.Build());
 
                 var discordStream = Program.bot.guilds[(ulong)command.GuildId].BotAudioClient.CreatePCMStream(Discord.Audio.AudioApplication.Mixed);
                 try
@@ -159,7 +160,7 @@ namespace MikaBotRevamped.Commands
                 return;
             }
 
-            await command.FollowupAsync(subCommand.ToString());
+            await command.RespondAsync(subCommand.ToString());
         }
 
         public SlashCommandProperties GetCommandProperties()
