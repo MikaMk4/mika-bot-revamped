@@ -5,7 +5,7 @@ using System.Collections;
 
 namespace MikaBotRevamped
 {
-    internal partial class CommandHandler
+    internal partial class SlashCommandHandler
     {
         private async Task JoinVoiceChannel(SocketSlashCommand command)
         {

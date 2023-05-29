@@ -1,6 +1,8 @@
 ﻿using Discord;
 using Discord.Net;
 using Discord.WebSocket;
+using MikaBotRevamped.Dependencies;
+using MikaBotRevamped.Handler;
 using System.Collections.Concurrent;
 
 namespace MikaBotRevamped
@@ -11,8 +13,9 @@ namespace MikaBotRevamped
         private readonly string? token;
 
         public ConcurrentDictionary<ulong, Guild> guilds = new();
+        public readonly UserDictionary Users;
 
-        public Bot(string? token, IEnumerable<ISlashCommand> slashCommands)
+        public Bot(string? token, IEnumerable<ISlashCommand> slashCommands, IEnumerable<IButton> buttons)
         {
             var config = new DiscordSocketConfig
             {
@@ -23,22 +26,59 @@ namespace MikaBotRevamped
 
             this.token = token;
 
-            CommandHandler commandHandler = new(client, slashCommands);
+            SlashCommandHandler commandHandler = new(client, slashCommands);
+            ButtonHandler buttonHandler = new(buttons);
+            ModalHandler modalHandler = new();
             SelectMenuHandler selectMenuHandler = new(client);
+
+            Users = new UserDictionary(new JsonPersistenceProvider("Users.json"));
+            Users.Load().Wait();
 
             guilds.TryAdd(870773459104436245, new Guild(870773459104436245));
 
             client.Log += Program.Log;
             client.Ready += commandHandler.RegisterCommands;
+            client.Ready += Ready;
             client.SlashCommandExecuted += commandHandler.HandleSlashCommand;
             client.SelectMenuExecuted += selectMenuHandler.ResolveSelectMenu;
+            client.ButtonExecuted += buttonHandler.HandleButton;
+            client.ModalSubmitted += modalHandler.HandleModal;
             client.JoinedGuild += RegisterGuild;
+        }
+
+        private Task Ready()
+        {
+            //client.SetGameAsync("Gacha Games!", type: ActivityType.Competing);
+            client.SetActivityAsync(new Game("Gacha Games!", ActivityType.Competing));
+            return Task.CompletedTask;
+        }
+
+        public void RegisterUser(ulong uid)
+        {
+            var user = new User(uid);
+            Users.TryAdd(uid, user);
         }
 
         private async Task RegisterGuild(SocketGuild socketGuild)
         {
             var guild = new Guild(socketGuild.Id);
             guilds.TryAdd(socketGuild.Id, guild);
+        }
+
+        public async Task<(User owner, Waifu waifu)> SearchUserAndWaifuByWaifuId(ulong targetWaifuId)
+        {
+            foreach (var userEntry in Users.Users.Values)
+            {
+                foreach (var waifu in userEntry.Waifus)
+                {
+                    if (waifu.Id == targetWaifuId)
+                    {
+                        return (userEntry, waifu);
+                    }
+                }
+            }
+
+            return (null, null);
         }
 
         public async Task RegisterCommands()

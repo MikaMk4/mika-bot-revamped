@@ -5,10 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MikaBotRevamped
+namespace MikaBotRevamped.Handler
 {
     internal interface IYoutubeUrlProvider
     {
-        List<YoutubeVideoInstance> GetAudioInstancesFromSearch(string searchQuery, int count);
+        List<YoutubeVideoInstance> GeVideoInstancesFromSearch(string searchQuery, int count);
+        YoutubeVideoInstance GetVideoInstanceFromUrl(string url);
     }
 }

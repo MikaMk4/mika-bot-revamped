@@ -1,6 +1,8 @@
 ﻿using Discord;
 using Discord.Interactions;
 using Discord.WebSocket;
+using MikaBotRevamped.Dependencies;
+using MikaBotRevamped.Handler;
 using Newtonsoft.Json;
 using Pastel;
 using System.Reflection;
@@ -16,22 +18,33 @@ namespace MikaBotRevamped
         private async Task MainAsync()
         {
             YoutubeProvider youtubeProvider = new();
+            WaifuProvider waifuProvider = new("https://api.waifu.pics/", "https://api.waifu.im/");
+            GachaProvider gachaProvider = new();
 
             // Dependency Injection gedöns
             DependencyProvider dependencyProvider = new();
             dependencyProvider.RegisterDependency<IYoutubeUrlProvider>(youtubeProvider);
+            dependencyProvider.RegisterDependency<IYoutubeStreamProvider>(youtubeProvider);
+            dependencyProvider.RegisterDependency<IWaifuProvider>(waifuProvider);
+            dependencyProvider.RegisterDependency<IGachaProvider>(gachaProvider);
 
             // Hol alle Klassen die ISlashCommand implementieren
             var slashCommandTypes = GetImplementingTypes(typeof(ISlashCommand));
             // Instanziere diese Klassen und pack sie in eine Liste
             var slashCommands = slashCommandTypes.Select(CreateInstance).Cast<ISlashCommand>().ToList();
 
-            // Setze die Dependencies für die SlashCommands
-            slashCommands.ForEach(slashCommand => slashCommand.SetDepencies(dependencyProvider));
+            // Hol alle Klassen die IButton implementieren
+            var buttonTypes = GetImplementingTypes(typeof(IButton));
+            // Instanziere diese Klassen und pack sie in eine Liste
+            var buttons = buttonTypes.Select(CreateInstance).Cast<IButton>().ToList();
+
+            // Setze die Dependencies für die SlashCommands und Buttons
+            slashCommands.ForEach(slashCommand => slashCommand.SetDependencies(dependencyProvider));
+            buttons.ForEach(button => button.SetDependencies(dependencyProvider));
 
             var token = Environment.GetEnvironmentVariable("DISCORD_API_TOKEN", EnvironmentVariableTarget.User);
 
-            bot = new(token, slashCommands);
+            bot = new(token, slashCommands, buttons);
             try
             {
                 await bot.Start();

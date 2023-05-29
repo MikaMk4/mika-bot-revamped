@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MikaBotRevamped
+namespace MikaBotRevamped.Handler
 {
     internal partial class SelectMenuHandler
     {

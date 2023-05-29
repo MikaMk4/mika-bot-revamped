@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MikaBotRevamped
+namespace MikaBotRevamped.Handler
 {
-    internal class DependencyProvider : IDependencyProvider
+    public class DependencyProvider : IDependencyProvider
     {
         private Dictionary<Type, object> dependencies = new Dictionary<Type, object>();
 

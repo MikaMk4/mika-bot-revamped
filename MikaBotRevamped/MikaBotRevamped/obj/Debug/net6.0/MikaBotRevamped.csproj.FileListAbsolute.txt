@@ -35,3 +35,8 @@ E:\repos\discord-bot-revamped\MikaBotRevamped\MikaBotRevamped\bin\Debug\net6.0\G
 E:\repos\discord-bot-revamped\MikaBotRevamped\MikaBotRevamped\bin\Debug\net6.0\Google.Apis.Auth.dll
 E:\repos\discord-bot-revamped\MikaBotRevamped\MikaBotRevamped\bin\Debug\net6.0\Google.Apis.Core.dll
 E:\repos\discord-bot-revamped\MikaBotRevamped\MikaBotRevamped\bin\Debug\net6.0\Google.Apis.YouTube.v3.dll
+E:\repos\discord-bot-revamped\MikaBotRevamped\MikaBotRevamped\bin\Debug\net6.0\AngleSharp.dll
+E:\repos\discord-bot-revamped\MikaBotRevamped\MikaBotRevamped\bin\Debug\net6.0\YoutubeExplode.dll
+E:\repos\discord-bot-revamped\MikaBotRevamped\MikaBotRevamped\bin\Debug\net6.0\CliWrap.dll
+E:\repos\discord-bot-revamped\MikaBotRevamped\MikaBotRevamped\bin\Debug\net6.0\Lavalink4NET.dll
+E:\repos\discord-bot-revamped\MikaBotRevamped\MikaBotRevamped\bin\Debug\net6.0\Lavalink4NET.DiscordNet.dll

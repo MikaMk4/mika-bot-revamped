@@ -6,13 +6,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MikaBotRevamped
+namespace MikaBotRevamped.Handler
 {
     internal interface ISlashCommand
     {
         string CommandName { get; }
         bool AsyncMode { get; }
-        void SetDepencies(IDependencyProvider dependencyProvider);
+        void SetDependencies(IDependencyProvider dependencyProvider);
         Task Respond(SocketSlashCommand command);
         SlashCommandProperties GetCommandProperties();
     }

@@ -6,10 +6,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MikaBotRevamped.Handler;
 
 namespace MikaBotRevamped
 {
-    internal partial class CommandHandler
+    internal partial class SlashCommandHandler
     {
         private List<ISlashCommand> slashCommands = new();
 
@@ -17,7 +18,7 @@ namespace MikaBotRevamped
         private Dictionary<ulong?, IVoiceChannel> voiceChannelInGuild = new();
         private Dictionary<ulong?, IAudioClient> audioClientInGuild = new();
 
-        public CommandHandler(DiscordSocketClient client, IEnumerable<ISlashCommand> commands)
+        public SlashCommandHandler(DiscordSocketClient client, IEnumerable<ISlashCommand> commands)
         {
             this.client = client;
             slashCommands.AddRange(commands);

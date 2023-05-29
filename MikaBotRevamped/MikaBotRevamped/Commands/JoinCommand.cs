@@ -1,18 +1,19 @@
 ﻿using Discord;
 using Discord.WebSocket;
+using MikaBotRevamped.Handler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MikaBotRevamped
+namespace MikaBotRevamped.Commands
 {
     internal class JoinCommand : ISlashCommand
     {
         public string CommandName => "join";
         public bool AsyncMode => true;
-        public void SetDepencies(IDependencyProvider dependencyProvider)
+        public void SetDependencies(IDependencyProvider dependencyProvider)
         {
         }
         public async Task Respond(SocketSlashCommand command)

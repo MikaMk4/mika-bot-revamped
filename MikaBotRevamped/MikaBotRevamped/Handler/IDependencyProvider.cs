@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MikaBotRevamped
+namespace MikaBotRevamped.Handler
 {
-    internal interface IDependencyProvider
+    public interface IDependencyProvider
     {
         TDependency GetDependency<TDependency>();
     }

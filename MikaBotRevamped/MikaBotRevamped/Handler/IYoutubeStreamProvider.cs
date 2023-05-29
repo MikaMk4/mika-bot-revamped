@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MikaBotRevamped
+namespace MikaBotRevamped.Handler
 {
     internal interface IYoutubeStreamProvider
     {
-
-        Task<Stream> GetStreamAsync(YoutubeVideoInstance youtubeVideoInstance);
+        Task<YoutubeVideoInstance> GetStreamAsync(YoutubeVideoInstance youtubeVideoInstance);
     }
 }

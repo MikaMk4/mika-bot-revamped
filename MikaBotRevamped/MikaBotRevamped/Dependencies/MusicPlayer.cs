@@ -1,11 +1,12 @@
 ﻿using Discord;
+using MikaBotRevamped.Handler;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MikaBotRevamped
+namespace MikaBotRevamped.Dependencies
 {
     internal class MusicPlayer : IMusicPlayer
     {
@@ -18,11 +19,6 @@ namespace MikaBotRevamped
         }
 
         async Task IMusicPlayer.Play()
-        {
-            throw new NotImplementedException();
-        }
-
-        async Task IMusicPlayer.QueueLocalAudioFile(string path)
         {
             throw new NotImplementedException();
         }

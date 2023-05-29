@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace MikaBotRevamped
+namespace MikaBotRevamped.Handler
 {
     internal interface IMusicPlayer
     {
-        Task QueueLocalAudioFile(string path);
         Task Play();
         Task StopPlayback();
         Task ResumePlayback();

@@ -9,6 +9,7 @@
         public Uri Thumbnail { get; set; }
         public TimeSpan Duration { get; set; }
         public TimeSpan ElapsedTime { get; set; }
+        public MemoryStream AudioStream { get; set; }
 
         public YoutubeVideoInstance(string title, string description, Uri url, Uri thumbnail, TimeSpan duration, TimeSpan elapsedTime, string channelTitle)
         {
@@ -19,6 +20,7 @@
             Duration = duration;
             ElapsedTime = elapsedTime;
             ChannelTitle = channelTitle;
+            AudioStream = new MemoryStream();
         }
     }
 }
