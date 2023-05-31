@@ -100,8 +100,6 @@ namespace MikaBotRevamped.Commands
                     return;
                 }
 
-                var test = Program.bot.Users.Users;
-                var test2 = Program.bot.Users.Users.ContainsKey(user.Id);
                 if (!Program.bot.Users.Users.TryGetValue(user.Id, out _))
                 {
                     await command.RespondAsync($"{user.Username} doesn't have any Waifus yet!");
@@ -113,16 +111,11 @@ namespace MikaBotRevamped.Commands
                 embedBuilder.Description = $"{user.Mention}'s Waifus:";
                 embedBuilder.Color = new Color(255, 0, 0);
 
-                for (int i = 0; i < 10; i++)
-                {
-                    if (i + page * 10 >= Program.bot.Users.Users[user.Id].Waifus.Count)
-                    {
-                        break;
-                    }
+                var waifus = Program.bot.Users.Users[user.Id].Waifus;
+                var waifusPerPage = 10;
+                var tenWaifus = GetPageElements(waifus, page, waifusPerPage);
 
-                    var waifu = Program.bot.Users.Users[user.Id].Waifus[i + page * 10];
-                    embedBuilder.AddField(waifu.Name, $"{waifu.Quality} | #{waifu.Id}");
-                }
+                tenWaifus.ForEach(waifu => embedBuilder.AddField(waifu.Name, $"{waifu.Quality} | #{waifu.Id}"));
 
                 command.RespondAsync(embed: embedBuilder.Build());
             } else if (subCommand == "view")
@@ -169,6 +162,22 @@ namespace MikaBotRevamped.Commands
                 var pity = Program.bot.Users.Users[user.Id].PityCount;
 
                 command.RespondAsync($"Your Pity Count: {pity}");
+            }
+        }
+
+        private List<T> GetPageElements<T>(List<T> list, int page, int elementsPerPage)
+        {
+            int startIndex = (page - 1) * elementsPerPage;
+            int endIndex = Math.Min(startIndex + elementsPerPage, list.Count);
+
+            if (startIndex >= list.Count)
+            {
+                // If the start index is beyond the list length, return an empty list
+                return new List<T>();
+            }
+            else
+            {
+                return list.GetRange(startIndex, endIndex - startIndex);
             }
         }
 

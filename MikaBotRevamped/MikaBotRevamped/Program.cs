@@ -14,9 +14,18 @@ namespace MikaBotRevamped
     {
         public static Bot bot;
 
+#if DEBUG
+        private static readonly string token = Environment.GetEnvironmentVariable("DISCORD_TOKEN_TEST", EnvironmentVariableTarget.User);
+        public static readonly bool debug = true;
+#else
+        private static readonly string token = Environment.GetEnvironmentVariable("DISCORD_TOKEN", EnvironmentVariableTarget.User);
+        public static readonly bool debug = false;
+#endif
+
         public static readonly ulong MikaUid = 452415473687068672;
         public static readonly ulong MikaTestGuildId = 1021344657646563348;
         public static readonly ulong MikaBotServerId = 1113461427433394339;
+        public static readonly ulong MondstadtGuildId = 870773459104436245;
 
         public static DependencyProvider dependencyProvider = new();
 
@@ -42,8 +51,6 @@ namespace MikaBotRevamped
 
             // Setze die Dependencies für die IButtons
             buttons.ForEach(button => button.SetDependencies(dependencyProvider));
-
-            var token = Environment.GetEnvironmentVariable("DISCORD_TOKEN", EnvironmentVariableTarget.User);
 
             bot = new(token, buttons);
             try

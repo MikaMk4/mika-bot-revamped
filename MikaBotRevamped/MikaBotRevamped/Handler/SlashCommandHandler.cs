@@ -52,6 +52,7 @@ namespace MikaBotRevamped
             var guild = client.GetGuild(guildId);
 
             await guild.BulkOverwriteApplicationCommandAsync(commandProperties.ToArray());
+            await Task.Delay(1000);
         }
 
         public void AddSlashCommand(ISlashCommand slashCommand)

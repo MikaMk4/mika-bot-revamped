@@ -24,7 +24,7 @@ namespace MikaBotRevamped.Handler
 
                 Waifu waifu = new Waifu(unclaimedWaifu, waifuName);
                 Program.bot.Users.Users[modal.User.Id].Waifus.Add(waifu);
-                Program.bot.Users.Save();
+                Program.bot.Users.Save(modal.User.Id);
 
                 Program.bot.Users.Users[modal.User.Id].RestFollowupMessage.ModifyAsync(x =>
                 {

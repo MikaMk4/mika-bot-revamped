@@ -14,7 +14,7 @@ namespace MikaBotRevamped
         private readonly string? token;
 
         public ConcurrentDictionary<ulong, Guild> guilds = new();
-        public readonly UserDictionary Users;
+        public UserDictionary Users;
 
         public SlashCommandHandler SlashCommandHandler { get; }
         private ButtonHandler ButtonHandler { get; }
@@ -38,11 +38,6 @@ namespace MikaBotRevamped
             ModalHandler = new();
             SelectMenuHandler = new(client);
 
-            Users = new UserDictionary(new JsonPersistenceProvider("Users.json"));
-            Users.Load().Wait();
-
-            guilds.TryAdd(870773459104436245, new Guild(870773459104436245));
-
             client.Log += Program.Log;
             client.Ready += Ready;
             client.SlashCommandExecuted += SlashCommandHandler.HandleSlashCommand;
@@ -54,13 +49,20 @@ namespace MikaBotRevamped
 
         private Task Ready()
         {
+            InstantiateAllSlashCommands();
             //Program.RegisterAllSlashCommands();
-            InstantateAllSlashCommands();
+
+            Program.Log(LogSeverity.Info, "Bot", "Loading all Users.");
+            Users = new UserDictionary(new JsonPersistenceProvider("./"));
+            Users.Load().Wait();
+
+            client.SetStatusAsync(UserStatus.Online);
+
             client.SetGameAsync("Gacha Games!", type: ActivityType.Competing);
             return Task.CompletedTask;
         }
 
-        private Task InstantateAllSlashCommands()
+        private Task InstantiateAllSlashCommands()
         {
             SlashCommandHandler.ClearSlashCommands();
 
@@ -80,10 +82,11 @@ namespace MikaBotRevamped
             return Task.CompletedTask;
         }
 
-        public void RegisterUser(ulong uid)
+        public async Task RegisterUser(ulong uid)
         {
-            var user = new User(uid);
-            Users.TryAdd(uid, user);
+            var dUser = await client.GetUserAsync(uid);
+            var user = new User(uid, dUser.Username, dUser.DiscriminatorValue);
+            Users.TryAdd(user);
         }
 
         private async Task RegisterGuild(SocketGuild socketGuild)

@@ -1,0 +1,51 @@
+{
+  "Username": "Mikaa",
+  "Discriminator": 9482,
+  "Uid": 317924843632852993,
+  "PityCount": 6,
+  "Waifus": [
+    {
+      "Name": "test 2",
+      "Id": 8,
+      "Tags": null,
+      "ImageUrl": "https://cdn.waifu.im/2043.jpeg",
+      "Quality": 1
+    },
+    {
+      "Name": "ai hayasaka",
+      "Id": 9,
+      "Tags": null,
+      "ImageUrl": "https://cdn.waifu.im/1017.jpeg",
+      "Quality": 0
+    },
+    {
+      "Name": "test 3",
+      "Id": 10,
+      "Tags": null,
+      "ImageUrl": "https://i.waifu.pics/7Apu5C9.jpg",
+      "Quality": 0
+    },
+    {
+      "Name": "mommy makima",
+      "Id": 11,
+      "Tags": null,
+      "ImageUrl": "https://cdn.waifu.im/3980.png",
+      "Quality": 3
+    },
+    {
+      "Name": "megumin",
+      "Id": 13,
+      "Tags": null,
+      "ImageUrl": "https://i.waifu.pics/cuwUkva.jpg",
+      "Quality": 0
+    },
+    {
+      "Name": "miku nakano",
+      "Id": 14,
+      "Tags": null,
+      "ImageUrl": "https://cdn.waifu.im/2593.png",
+      "Quality": 0
+    }
+  ],
+  "UnclaimedWaifus": []
+}

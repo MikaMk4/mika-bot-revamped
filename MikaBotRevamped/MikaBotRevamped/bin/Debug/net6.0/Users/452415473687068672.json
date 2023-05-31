@@ -1,0 +1,30 @@
+{
+  "Username": "Mika",
+  "Discriminator": 2000,
+  "Uid": 452415473687068672,
+  "PityCount": 6,
+  "Waifus": [
+    {
+      "Name": "okita souji",
+      "Id": 1,
+      "Tags": null,
+      "ImageUrl": "https://i.waifu.pics/bzG5LVO.jpg",
+      "Quality": 0
+    },
+    {
+      "Name": "Nino Nakano",
+      "Id": 2,
+      "Tags": null,
+      "ImageUrl": "https://i.waifu.pics/XcpL3nR.jpg",
+      "Quality": 2
+    },
+    {
+      "Name": "Ruka Sarashina",
+      "Id": 7,
+      "Tags": null,
+      "ImageUrl": "https://i.waifu.pics/BwHGNNK.png",
+      "Quality": 0
+    }
+  ],
+  "UnclaimedWaifus": []
+}

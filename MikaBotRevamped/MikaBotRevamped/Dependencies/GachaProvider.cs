@@ -58,7 +58,7 @@ namespace MikaBotRevamped.Dependencies
                 });
             }
 
-            Program.bot.Users.Save();
+            Program.bot.Users.Save(user.Uid);
 
             EmbedBuilder embedBuilder = new EmbedBuilder();
             embedBuilder.Title = "Waifu rolled";

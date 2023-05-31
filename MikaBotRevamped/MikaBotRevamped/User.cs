@@ -4,13 +4,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace MikaBotRevamped
 {
     [Serializable]
     public class User
     {
-        public ulong Uid { get; set; }
+        public string Username { get; }
+        public ushort Discriminator { get; }
+        public ulong Uid { get; }
         public int PityCount { get; set; } = 0;
         public List<Waifu> Waifus { get; set; } = new List<Waifu>();
         public List<UnclaimedWaifu> UnclaimedWaifus { get; set; } = new List<UnclaimedWaifu>();
@@ -18,9 +21,12 @@ namespace MikaBotRevamped
         [NonSerialized]
         public RestFollowupMessage? RestFollowupMessage;
 
-        public User(ulong uid)
+        [JsonConstructor]
+        public User(ulong uid, string username, ushort discriminator)
         {
             Uid = uid;
+            Username = username;
+            Discriminator = discriminator;
         }
     }
 }

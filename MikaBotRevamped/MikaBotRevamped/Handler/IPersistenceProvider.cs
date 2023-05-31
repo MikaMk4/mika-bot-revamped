@@ -9,7 +9,8 @@ namespace MikaBotRevamped.Handler
 {
     public interface IPersistenceProvider
     {
-        Task<ConcurrentDictionary<ulong, User>> LoadUsers();
-        Task SaveUsers(ConcurrentDictionary<ulong, User> users);
+        Task<List<User>> LoadAllUsers();
+        Task SaveAllUsers(List<User> users);
+        Task SaveSingleUser(User user);
     }
 }

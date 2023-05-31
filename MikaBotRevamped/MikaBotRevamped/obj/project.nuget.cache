@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "OhbNu4NAUGB5kAWqzUe/JzgnFe4kPiASncBfTkbieW+i5GfzYrNtZ85FZS1MEJJRBo5RFvFY4AQRYscDyxTv+Q==",
+  "dgSpecHash": "CDOxhyk2mFJhhytxp5OPFI+pO7st1xxYFayo4Z4lE5HoNbandp09tVBCBXtlLfvxANmJYXGqfL0yBN6uybQXzQ==",
   "success": true,
   "projectFilePath": "E:\\repos\\discord-bot-revamped\\MikaBotRevamped\\MikaBotRevamped\\MikaBotRevamped.csproj",
   "expectedPackageFiles": [
@@ -22,7 +22,7 @@
     "C:\\Users\\Mikail\\.nuget\\packages\\lavalink4net\\3.0.0\\lavalink4net.3.0.0.nupkg.sha512",
     "C:\\Users\\Mikail\\.nuget\\packages\\lavalink4net.discord.net\\3.0.0\\lavalink4net.discord.net.3.0.0.nupkg.sha512",
     "C:\\Users\\Mikail\\.nuget\\packages\\microsoft.extensions.dependencyinjection.abstractions\\5.0.0\\microsoft.extensions.dependencyinjection.abstractions.5.0.0.nupkg.sha512",
-    "C:\\Users\\Mikail\\.nuget\\packages\\newtonsoft.json\\13.0.2\\newtonsoft.json.13.0.2.nupkg.sha512",
+    "C:\\Users\\Mikail\\.nuget\\packages\\newtonsoft.json\\13.0.3\\newtonsoft.json.13.0.3.nupkg.sha512",
     "C:\\Users\\Mikail\\.nuget\\packages\\pastel\\4.1.0\\pastel.4.1.0.nupkg.sha512",
     "C:\\Users\\Mikail\\.nuget\\packages\\sharpgrabber\\2.1.0\\sharpgrabber.2.1.0.nupkg.sha512",
     "C:\\Users\\Mikail\\.nuget\\packages\\sharpgrabber.youtube\\1.5.0\\sharpgrabber.youtube.1.5.0.nupkg.sha512",

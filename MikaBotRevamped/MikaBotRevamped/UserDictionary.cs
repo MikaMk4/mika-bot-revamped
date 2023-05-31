@@ -23,24 +23,32 @@ namespace MikaBotRevamped
 
         public async Task Load()
         {
-            var loadedUsers = await persistenceProvider.LoadUsers();
+            var loadedUsers = await persistenceProvider.LoadAllUsers();
             foreach (var user in loadedUsers)
             {
-                users.TryAdd(user.Key, user.Value);
+                TryAdd(user);
             }
         }
 
-        public async Task Save()
+        public async Task SaveAll()
         {
-            await persistenceProvider.SaveUsers(users);
+            await persistenceProvider.SaveAllUsers(users.Values.ToList());
         }
 
-        public bool TryAdd(ulong uid, User user)
+        public async Task Save(ulong uid)
         {
-            var added = users.TryAdd(uid, user);
+            if (users.TryGetValue(uid, out var user))
+            {
+                await persistenceProvider.SaveSingleUser(user);
+            }
+        }
+
+        public bool TryAdd(User user)
+        {
+            var added = users.TryAdd(user.Uid, user);
             if (added)
             {
-                Save();
+                Save(user.Uid);
             }
             return added;
         }
@@ -50,9 +58,15 @@ namespace MikaBotRevamped
             var removed = users.TryRemove(uid, out removedUser);
             if (removed)
             {
-                Save();
+                SaveAll();
             }
             return removed;
+        }
+
+        public User GetUser(ulong uid)
+        {
+            users.TryGetValue(uid, out var user);
+            return user;
         }
     }
 }

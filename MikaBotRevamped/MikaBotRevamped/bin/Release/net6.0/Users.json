@@ -12,7 +12,7 @@
   },
   "452415473687068672": {
     "Uid": 452415473687068672,
-    "PityCount": 25,
+    "PityCount": 27,
     "Waifus": [
       {
         "Name": "Formidable",
@@ -435,11 +435,16 @@
         "Quality": 1
       }
     ],
-    "UnclaimedWaifus": []
+    "UnclaimedWaifus": [
+      {
+        "ImageUrl": "https://i.waifu.pics/cKe~bpZ.jpg",
+        "Quality": 1
+      }
+    ]
   },
   "460090800362225665": {
     "Uid": 460090800362225665,
-    "PityCount": 7,
+    "PityCount": 4,
     "Waifus": [
       {
         "Name": "Sirno",
@@ -1812,9 +1817,91 @@
         "Tags": null,
         "ImageUrl": "https://i.waifu.pics/s1DLRKM.png",
         "Quality": 3
+      },
+      {
+        "Name": "jeen",
+        "Id": 452,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/2866.png",
+        "Quality": 0
+      },
+      {
+        "Name": "nanananaka",
+        "Id": 453,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/tLc5RfN.png",
+        "Quality": 0
+      },
+      {
+        "Name": "watson",
+        "Id": 454,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/WMTQpNf.jpg",
+        "Quality": 1
+      },
+      {
+        "Name": "reifen",
+        "Id": 455,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/6475.png",
+        "Quality": 0
+      },
+      {
+        "Name": "rum",
+        "Id": 456,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/FWE8ggD.png",
+        "Quality": 0
+      },
+      {
+        "Name": "kekw",
+        "Id": 457,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/6473.png",
+        "Quality": 2
+      },
+      {
+        "Name": "tifa lockheart",
+        "Id": 458,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/927.jpeg",
+        "Quality": 6
+      },
+      {
+        "Name": "pyra",
+        "Id": 459,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/2995.jpeg",
+        "Quality": 0
+      },
+      {
+        "Name": "jean",
+        "Id": 460,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/1809.png",
+        "Quality": 3
+      },
+      {
+        "Name": "rem",
+        "Id": 461,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/3387.png",
+        "Quality": 2
+      },
+      {
+        "Name": "kurororoororro",
+        "Id": 462,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/2636.jpeg",
+        "Quality": 5
       }
     ],
-    "UnclaimedWaifus": []
+    "UnclaimedWaifus": [
+      {
+        "ImageUrl": "https://cdn.waifu.im/7636.jpg",
+        "Quality": 0
+      }
+    ]
   },
   "317924843632852993": {
     "Uid": 317924843632852993,
@@ -1829,7 +1916,7 @@
   },
   "669673885603463196": {
     "Uid": 669673885603463196,
-    "PityCount": 10,
+    "PityCount": 11,
     "Waifus": [
       {
         "Name": "Shenhe ",
@@ -2051,8 +2138,8 @@
     ],
     "UnclaimedWaifus": [
       {
-        "ImageUrl": "https://i.waifu.pics/_Yp1A7O.jpg",
-        "Quality": 1
+        "ImageUrl": "https://i.waifu.pics/bMH6oaI.png",
+        "Quality": 0
       }
     ]
   },

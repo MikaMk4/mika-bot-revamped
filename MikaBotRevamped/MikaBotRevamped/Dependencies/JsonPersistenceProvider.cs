@@ -1,4 +1,5 @@
 ﻿using MikaBotRevamped.Handler;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
@@ -11,31 +12,52 @@ namespace MikaBotRevamped.Dependencies
 {
     public class JsonPersistenceProvider : IPersistenceProvider
     {
-        private readonly string filePath;
+        private readonly string workingDirectory;
 
-        public JsonPersistenceProvider(string filePath)
+        public JsonPersistenceProvider(string workingDirectory)
         {
-            this.filePath = filePath;
+            this.workingDirectory = workingDirectory;
         }
 
-        public async Task<ConcurrentDictionary<ulong, User>> LoadUsers()
+        public async Task<List<User>> LoadAllUsers()
         {
-            if (!File.Exists(filePath))
-                return new ConcurrentDictionary<ulong, User>();
+            string usersDirectory = Path.Combine(workingDirectory, "Users");
 
-            using var fileStream = File.OpenRead(filePath);
-            return await JsonSerializer.DeserializeAsync<ConcurrentDictionary<ulong, User>>(fileStream);
-        }
+            if (!Directory.Exists(usersDirectory))
+                return new List<User>();
 
-        public async Task SaveUsers(ConcurrentDictionary<ulong, User> users)
-        {
-            var options = new JsonSerializerOptions
+            var userList = new List<User>();
+            string[] jsonFiles = Directory.GetFiles(usersDirectory, "*.json");
+
+            foreach (string filePath in jsonFiles)
             {
-                WriteIndented = true
-            };
+                string jsonContent = await File.ReadAllTextAsync(filePath);
+                var userFromFile = JsonConvert.DeserializeObject<User>(jsonContent);
+                userList.Add(userFromFile);
+            }
 
-            using var fileStream = File.Create(filePath);
-            await JsonSerializer.SerializeAsync(fileStream, users, options);
+            return userList;
+        }
+
+        public async Task SaveAllUsers(List<User> users)
+        {
+            users.ForEach(user => SaveSingleUser(user));
+        }
+
+        public async Task SaveSingleUser(User user)
+        {
+            try
+            {
+                string jsonContent = JsonConvert.SerializeObject(user, Formatting.Indented);
+                string fileName = $"{user.Username}#{user.Discriminator}-{user.Uid}.json";
+                string filePath = Path.Combine(workingDirectory, "Users", fileName);
+
+                await File.WriteAllTextAsync(filePath, jsonContent);
+            }
+            catch (Exception e)
+            {
+                Program.Log(Discord.LogSeverity.Error, "JsonPersistenceProvider", e.Message + e.StackTrace);
+            }
         }
     }
 }
