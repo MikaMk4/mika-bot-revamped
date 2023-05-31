@@ -1,4 +1,5 @@
 ﻿using Discord;
+using Discord.Commands;
 using Discord.Net;
 using Discord.WebSocket;
 using MikaBotRevamped.Dependencies;
@@ -43,7 +44,6 @@ namespace MikaBotRevamped
             guilds.TryAdd(870773459104436245, new Guild(870773459104436245));
 
             client.Log += Program.Log;
-            client.Ready += SlashCommandHandler.RegisterCommands;
             client.Ready += Ready;
             client.SlashCommandExecuted += SlashCommandHandler.HandleSlashCommand;
             client.SelectMenuExecuted += SelectMenuHandler.ResolveSelectMenu;
@@ -54,8 +54,29 @@ namespace MikaBotRevamped
 
         private Task Ready()
         {
-            Program.RegisterAllSlashCommands();
+            //Program.RegisterAllSlashCommands();
+            InstantateAllSlashCommands();
             client.SetGameAsync("Gacha Games!", type: ActivityType.Competing);
+            return Task.CompletedTask;
+        }
+
+        private Task InstantateAllSlashCommands()
+        {
+            SlashCommandHandler.ClearSlashCommands();
+
+            // Hol alle Klassen die ISlashCommand implementieren
+            var slashCommandTypes = Program.GetImplementingTypes(typeof(ISlashCommand));
+            // Instanziere diese Klassen und pack sie in eine Liste
+            var slashCommands = slashCommandTypes.Select(Program.CreateInstance).Cast<ISlashCommand>().ToList();
+
+            // Setze die Dependencies für die SlashCommands und Buttons
+            slashCommands.ForEach(slashCommand => slashCommand.SetDependencies(Program.dependencyProvider));
+
+            foreach (var slashCommand in slashCommands)
+            {
+                SlashCommandHandler.AddSlashCommand(slashCommand);
+            }
+
             return Task.CompletedTask;
         }
 

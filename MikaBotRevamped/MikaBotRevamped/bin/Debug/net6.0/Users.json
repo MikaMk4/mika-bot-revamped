@@ -12,7 +12,7 @@
   },
   "452415473687068672": {
     "Uid": 452415473687068672,
-    "PityCount": 18,
+    "PityCount": 25,
     "Waifus": [
       {
         "Name": "Formidable",
@@ -419,14 +419,23 @@
         "Tags": null,
         "ImageUrl": "https://cdn.waifu.im/2771.jpeg",
         "Quality": 2
+      },
+      {
+        "Name": "epic waifu",
+        "Id": 450,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/7609.jpg",
+        "Quality": 3
+      },
+      {
+        "Name": "Mori Calliope",
+        "Id": 451,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/7638.jpg",
+        "Quality": 1
       }
     ],
-    "UnclaimedWaifus": [
-      {
-        "ImageUrl": "https://i.waifu.pics/jiHthY6.png",
-        "Quality": 0
-      }
-    ]
+    "UnclaimedWaifus": []
   },
   "460090800362225665": {
     "Uid": 460090800362225665,

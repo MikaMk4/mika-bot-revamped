@@ -44,12 +44,12 @@ namespace MikaBotRevamped
             }
         }
 
-        public async Task RegisterCommands()
+        public async Task RegisterCommands(ulong guildId)
         {
             List<ApplicationCommandProperties> commandProperties = new();
             commandProperties.AddRange(slashCommands.Select(c => c.GetCommandProperties()));
 
-            var guild = client.GetGuild(870773459104436245); // Mondstadt Server
+            var guild = client.GetGuild(guildId);
 
             await guild.BulkOverwriteApplicationCommandAsync(commandProperties.ToArray());
         }

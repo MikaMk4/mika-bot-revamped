@@ -15,8 +15,10 @@ namespace MikaBotRevamped
         public static Bot bot;
 
         public static readonly ulong MikaUid = 452415473687068672;
+        public static readonly ulong MikaTestGuildId = 1021344657646563348;
+        public static readonly ulong MikaBotServerId = 1113461427433394339;
 
-        private static DependencyProvider dependencyProvider = new();
+        public static DependencyProvider dependencyProvider = new();
 
         public static Task Main(string[] args) => new Program().MainAsync();
 
@@ -41,7 +43,7 @@ namespace MikaBotRevamped
             // Setze die Dependencies für die IButtons
             buttons.ForEach(button => button.SetDependencies(dependencyProvider));
 
-            var token = Environment.GetEnvironmentVariable("DISCORD_API_TOKEN", EnvironmentVariableTarget.User);
+            var token = Environment.GetEnvironmentVariable("DISCORD_TOKEN", EnvironmentVariableTarget.User);
 
             bot = new(token, buttons);
             try
@@ -58,22 +60,7 @@ namespace MikaBotRevamped
         {
             Log(LogSeverity.Info, "Program", "Registering all slash commands");
 
-            bot.SlashCommandHandler.ClearSlashCommands();
-
-            // Hol alle Klassen die ISlashCommand implementieren
-            var slashCommandTypes = GetImplementingTypes(typeof(ISlashCommand));
-            // Instanziere diese Klassen und pack sie in eine Liste
-            var slashCommands = slashCommandTypes.Select(CreateInstance).Cast<ISlashCommand>().ToList();
-
-            // Setze die Dependencies für die SlashCommands und Buttons
-            slashCommands.ForEach(slashCommand => slashCommand.SetDependencies(dependencyProvider));
-
-            foreach (var slashCommand in slashCommands)
-            {
-                bot.SlashCommandHandler.AddSlashCommand(slashCommand);
-            }
-
-            await bot.SlashCommandHandler.RegisterCommands();
+            await bot.SlashCommandHandler.RegisterCommands(MikaBotServerId);
         }
 
         public static IEnumerable<Type> GetImplementingTypes(Type interfaceType)
