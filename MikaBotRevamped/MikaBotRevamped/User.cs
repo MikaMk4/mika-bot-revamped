@@ -24,7 +24,7 @@ namespace MikaBotRevamped
         public RestFollowupMessage? RestFollowupMessage;
 
         [JsonConstructor]
-        public User(ulong uid, string username, ushort discriminator)
+        public User(ulong uid)
         {
             Uid = uid;
         }

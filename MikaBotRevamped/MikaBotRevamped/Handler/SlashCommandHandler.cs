@@ -52,7 +52,6 @@ namespace MikaBotRevamped
             var guild = client.GetGuild(guildId);
 
             await guild.BulkOverwriteApplicationCommandAsync(commandProperties.ToArray());
-            await Task.Delay(1000);
         }
 
         internal async Task RegisterCommand(ulong guildId, ISlashCommand commandInstance)
@@ -60,6 +59,11 @@ namespace MikaBotRevamped
             var guild = client.GetGuild(guildId);
 
             await guild.CreateApplicationCommandAsync(commandInstance.GetCommandProperties());
+        }
+
+        internal async Task RegisterCommand(ISlashCommand commandInstance)
+        {
+            await client.CreateGlobalApplicationCommandAsync(commandInstance.GetCommandProperties());
         }
 
         public void AddSlashCommand(ISlashCommand slashCommand)
