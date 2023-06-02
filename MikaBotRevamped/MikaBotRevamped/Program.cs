@@ -36,6 +36,7 @@ namespace MikaBotRevamped
             YoutubeProvider youtubeProvider = new();
             WaifuProvider waifuProvider = new("https://api.waifu.pics/", "https://api.waifu.im/");
             GachaProvider gachaProvider = new();
+            GameItemProvider gameItemProvider = new();
 
             // Dependency Injection gedöns
             dependencyProvider.RegisterDependency<IYoutubeUrlProvider>(youtubeProvider);
@@ -43,6 +44,7 @@ namespace MikaBotRevamped
             dependencyProvider.RegisterDependency<IWaifuProvider>(waifuProvider);
             dependencyProvider.RegisterDependency<IGachaProvider>(gachaProvider);
             dependencyProvider.RegisterDependency<IDependencyProvider>(dependencyProvider);
+            dependencyProvider.RegisterDependency<IGameItemProvider>(gameItemProvider);
 
             // Hol alle Klassen die IButton implementieren
             var buttonTypes = GetImplementingTypes(typeof(IButton));

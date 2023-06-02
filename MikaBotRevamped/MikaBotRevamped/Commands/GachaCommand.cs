@@ -17,6 +17,7 @@ namespace MikaBotRevamped.Commands
         public bool AsyncMode => false;
         private IWaifuProvider waifuProvider;
         private IGachaProvider gachaProvider;
+        private IGameItemProvider gameItemProvider;
 
         public async Task Respond(SocketSlashCommand command)
         {
@@ -28,11 +29,20 @@ namespace MikaBotRevamped.Commands
 
                 if (!Program.bot.Users.Users.ContainsKey(command.User.Id))
                 {
-                    preText += "Welcome! I see you just rolled your first Waifu. I'll register you real quick!";
+                    preText += "Welcome! I see you just rolled your first Waifu. I'll register you real quick and give you 20 Rolls for the beginning!";
                     Program.bot.RegisterUser(command.User.Id);
                 }
 
-                var embed = gachaProvider.RollAndBuildEmbed(waifuProvider, command);
+                Embed embed;
+
+                try
+                {
+                    embed = gachaProvider.RollAndBuildEmbed(waifuProvider, gameItemProvider, command);
+                } catch (Exception e)
+                {
+                    await command.RespondAsync(e.Message, ephemeral:true);
+                    return;
+                }
 
                 var buttonBuilder = new ButtonBuilder();
                 buttonBuilder.WithCustomId("give-waifu-name-button");
@@ -185,6 +195,7 @@ namespace MikaBotRevamped.Commands
         {
             waifuProvider = dependencyProvider.GetDependency<IWaifuProvider>();
             gachaProvider = dependencyProvider.GetDependency<IGachaProvider>();
+            gameItemProvider = dependencyProvider.GetDependency<IGameItemProvider>();
         }
 
         public SlashCommandProperties GetCommandProperties()

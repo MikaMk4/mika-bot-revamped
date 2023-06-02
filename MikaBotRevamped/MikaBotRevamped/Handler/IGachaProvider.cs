@@ -11,6 +11,6 @@ namespace MikaBotRevamped.Handler
     internal interface IGachaProvider
     {
         //UnclaimedWaifu Roll(IWaifuProvider waifuProvider, int pityCount);
-        Embed RollAndBuildEmbed(IWaifuProvider waifuProvider, SocketSlashCommand command);
+        Embed RollAndBuildEmbed(IWaifuProvider waifuProvider, IGameItemProvider gameItemProvider, SocketSlashCommand command);
     }
 }

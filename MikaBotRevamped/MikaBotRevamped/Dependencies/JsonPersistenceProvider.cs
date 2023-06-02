@@ -49,7 +49,7 @@ namespace MikaBotRevamped.Dependencies
             try
             {
                 string jsonContent = JsonConvert.SerializeObject(user, Formatting.Indented);
-                string fileName = $"{user.Username}#{user.Discriminator}-{user.Uid}.json";
+                string fileName = $"{user.Uid}.json";
                 string filePath = Path.Combine(workingDirectory, "Users", fileName);
 
                 await File.WriteAllTextAsync(filePath, jsonContent);

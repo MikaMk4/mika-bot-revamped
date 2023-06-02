@@ -4,6 +4,7 @@ using Discord.Net;
 using Discord.WebSocket;
 using MikaBotRevamped.Dependencies;
 using MikaBotRevamped.Handler;
+using MikaBotRevamped.Items;
 using System.Collections.Concurrent;
 
 namespace MikaBotRevamped
@@ -45,6 +46,12 @@ namespace MikaBotRevamped
             client.ButtonExecuted += ButtonHandler.HandleButton;
             client.ModalSubmitted += ModalHandler.HandleModal;
             client.JoinedGuild += RegisterGuild;
+            client.UserUpdated += Client_UserUpdated;
+        }
+
+        private Task Client_UserUpdated(SocketUser arg1, SocketUser arg2)
+        {
+            throw new NotImplementedException();
         }
 
         private Task Ready()
@@ -86,6 +93,7 @@ namespace MikaBotRevamped
         {
             var dUser = await client.GetUserAsync(uid);
             var user = new User(uid, dUser.Username, dUser.DiscriminatorValue);
+            user.AddItem(new Roll(), 20);
             Users.TryAdd(user);
         }
 

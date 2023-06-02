@@ -12,7 +12,7 @@
   },
   "452415473687068672": {
     "Uid": 452415473687068672,
-    "PityCount": 27,
+    "PityCount": 11,
     "Waifus": [
       {
         "Name": "Formidable",
@@ -433,18 +433,67 @@
         "Tags": null,
         "ImageUrl": "https://cdn.waifu.im/7638.jpg",
         "Quality": 1
+      },
+      {
+        "Name": "Echidna",
+        "Id": 463,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/PQO5wPN.jpg",
+        "Quality": 0
+      },
+      {
+        "Name": "Lumine?",
+        "Id": 464,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/3935.jpeg",
+        "Quality": 2
+      },
+      {
+        "Name": "Raiden Shogun",
+        "Id": 473,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/7783.jpg",
+        "Quality": 1
+      },
+      {
+        "Name": "Kafka",
+        "Id": 474,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/8099.jpg",
+        "Quality": 0
+      },
+      {
+        "Name": "MOMMY",
+        "Id": 475,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/8099.jpg",
+        "Quality": 0
+      },
+      {
+        "Name": "bremerton",
+        "Id": 477,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/qjEV-At.jpg",
+        "Quality": 1
+      },
+      {
+        "Name": "EI",
+        "Id": 478,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/8053.jpg",
+        "Quality": 5
       }
     ],
     "UnclaimedWaifus": [
       {
-        "ImageUrl": "https://i.waifu.pics/cKe~bpZ.jpg",
-        "Quality": 1
+        "ImageUrl": "https://cdn.waifu.im/5847.jpeg",
+        "Quality": 0
       }
     ]
   },
   "460090800362225665": {
     "Uid": 460090800362225665,
-    "PityCount": 4,
+    "PityCount": 0,
     "Waifus": [
       {
         "Name": "Sirno",
@@ -1894,14 +1943,65 @@
         "Tags": null,
         "ImageUrl": "https://cdn.waifu.im/2636.jpeg",
         "Quality": 5
+      },
+      {
+        "Name": "reeeeeemmmmm (longhair)",
+        "Id": 465,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/3329.jpeg",
+        "Quality": 0
+      },
+      {
+        "Name": "hu",
+        "Id": 466,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/8DSLwjr.png",
+        "Quality": 1
+      },
+      {
+        "Name": "sayou",
+        "Id": 467,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/3904.jpg",
+        "Quality": 1
+      },
+      {
+        "Name": "rukia",
+        "Id": 468,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/7tsyFFs.png",
+        "Quality": 3
+      },
+      {
+        "Name": "Mai",
+        "Id": 469,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/mbQ4c4V.jpg",
+        "Quality": 3
+      },
+      {
+        "Name": "sagiri",
+        "Id": 470,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/911.png",
+        "Quality": 0
+      },
+      {
+        "Name": "roxy",
+        "Id": 471,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/tE7-FfJ.jpg",
+        "Quality": 2
+      },
+      {
+        "Name": "yoimiya",
+        "Id": 472,
+        "Tags": null,
+        "ImageUrl": "https://i.waifu.pics/20~zWP3.png",
+        "Quality": 5
       }
     ],
-    "UnclaimedWaifus": [
-      {
-        "ImageUrl": "https://cdn.waifu.im/7636.jpg",
-        "Quality": 0
-      }
-    ]
+    "UnclaimedWaifus": []
   },
   "317924843632852993": {
     "Uid": 317924843632852993,
@@ -1916,7 +2016,7 @@
   },
   "669673885603463196": {
     "Uid": 669673885603463196,
-    "PityCount": 11,
+    "PityCount": 15,
     "Waifus": [
       {
         "Name": "Shenhe ",
@@ -2134,12 +2234,19 @@
         "Tags": null,
         "ImageUrl": "https://i.waifu.pics/EAJXNuw.jpg",
         "Quality": 1
+      },
+      {
+        "Name": "Nobara",
+        "Id": 476,
+        "Tags": null,
+        "ImageUrl": "https://cdn.waifu.im/3706.jpeg",
+        "Quality": 0
       }
     ],
     "UnclaimedWaifus": [
       {
-        "ImageUrl": "https://i.waifu.pics/bMH6oaI.png",
-        "Quality": 0
+        "ImageUrl": "https://cdn.waifu.im/6845.png",
+        "Quality": 1
       }
     ]
   },

@@ -1,30 +1,53 @@
 {
-  "Username": "Mika",
-  "Discriminator": 2000,
   "Uid": 452415473687068672,
-  "PityCount": 6,
+  "PityCount": 3,
   "Waifus": [
     {
-      "Name": "okita souji",
+      "Name": "Raiden",
       "Id": 1,
       "Tags": null,
-      "ImageUrl": "https://i.waifu.pics/bzG5LVO.jpg",
+      "ImageUrl": "https://cdn.waifu.im/7497.jpg",
       "Quality": 0
     },
     {
-      "Name": "Nino Nakano",
+      "Name": "Hayasaka",
       "Id": 2,
       "Tags": null,
-      "ImageUrl": "https://i.waifu.pics/XcpL3nR.jpg",
-      "Quality": 2
+      "ImageUrl": "https://i.waifu.pics/9seL-Rc.jpg",
+      "Quality": 3
     },
     {
-      "Name": "Ruka Sarashina",
-      "Id": 7,
+      "Name": "Mona",
+      "Id": 3,
       "Tags": null,
-      "ImageUrl": "https://i.waifu.pics/BwHGNNK.png",
+      "ImageUrl": "https://i.waifu.pics/8pUgW9x.png",
+      "Quality": 0
+    },
+    {
+      "Name": "Kaguya Shinomiya",
+      "Id": 4,
+      "Tags": null,
+      "ImageUrl": "https://cdn.waifu.im/2343.jpg",
+      "Quality": 0
+    },
+    {
+      "Name": "rei-kun Jean",
+      "Id": 5,
+      "Tags": null,
+      "ImageUrl": "https://cdn.waifu.im/1772.png",
       "Quality": 0
     }
   ],
-  "UnclaimedWaifus": []
+  "UnclaimedWaifus": [
+    {
+      "ImageUrl": "https://i.waifu.pics/3DpVCc3.jpg",
+      "Quality": 0
+    }
+  ],
+  "Items": [
+    {
+      "Id": 1,
+      "Amount": 17
+    }
+  ]
 }

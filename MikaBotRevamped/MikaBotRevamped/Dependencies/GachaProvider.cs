@@ -1,6 +1,7 @@
 ﻿using Discord;
 using Discord.WebSocket;
 using MikaBotRevamped.Handler;
+using MikaBotRevamped.Items;
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
@@ -39,16 +40,22 @@ namespace MikaBotRevamped.Dependencies
             return waifu;
         }
 
-        public Embed RollAndBuildEmbed(IWaifuProvider waifuProvider, SocketSlashCommand command)
+        public Embed RollAndBuildEmbed(IWaifuProvider waifuProvider, IGameItemProvider gameItemProvider, SocketSlashCommand command)
         {
             var user = Program.bot.Users.Users[command.User.Id];
             var isNearPity = user.PityCount >= MYTHIC_HARD_PITY - 11 && user.PityCount < MYTHIC_HARD_PITY - 1;
+
+            if (user.GetItemCount(new Roll()) < 1)
+            {
+                throw new Exception("You do not have enough Rolls!");
+            }
 
             UnclaimedWaifu unclaimedWaifu = Roll(waifuProvider, user.PityCount);
 
             user.UnclaimedWaifus.Clear();
             user.UnclaimedWaifus.Add(unclaimedWaifu);
             user.PityCount = user.PityCount >= MYTHIC_HARD_PITY-1 ? 0 : user.PityCount + 1;
+            user.RemoveItem(new Roll(), 1);
 
             if (user.RestFollowupMessage != null)
             {
