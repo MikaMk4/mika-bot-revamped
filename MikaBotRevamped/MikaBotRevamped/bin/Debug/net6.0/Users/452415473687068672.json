@@ -1,6 +1,6 @@
 {
   "Uid": 452415473687068672,
-  "PityCount": 3,
+  "PityCount": 1,
   "Waifus": [
     {
       "Name": "Raiden",
@@ -40,14 +40,15 @@
   ],
   "UnclaimedWaifus": [
     {
-      "ImageUrl": "https://i.waifu.pics/3DpVCc3.jpg",
+      "ImageUrl": "https://cdn.waifu.im/7224.jpg",
       "Quality": 0
     }
   ],
   "Items": [
     {
       "Id": 1,
-      "Amount": 17
+      "Amount": 29
     }
-  ]
+  ],
+  "LastDaily": "2023-06-02T21:57:06.8425931+02:00"
 }

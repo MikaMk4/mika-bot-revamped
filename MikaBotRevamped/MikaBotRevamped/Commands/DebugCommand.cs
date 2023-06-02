@@ -28,6 +28,17 @@ namespace MikaBotRevamped.Commands
                     .WithDescription("Register all commands")
                     .WithType(ApplicationCommandOptionType.SubCommand)
                 )
+                .AddOption(new SlashCommandOptionBuilder()
+                    .WithName("single")
+                    .WithDescription("Register a single command")
+                    .WithType(ApplicationCommandOptionType.SubCommand)
+                    .AddOption(new SlashCommandOptionBuilder()
+                        .WithName("name")
+                        .WithDescription("Name of the command")
+                        .WithType(ApplicationCommandOptionType.String)
+                        .WithRequired(true)
+                    )
+                )
                 .Build();
         }
 
@@ -45,6 +56,20 @@ namespace MikaBotRevamped.Commands
                 await command.DeferAsync(ephemeral:true);
                 await Program.RegisterAllSlashCommands();
                 await command.FollowupAsync("Registered all commands.", ephemeral:true);
+            } else if (subCommand.Name == "single")
+            {
+                var name = subCommand.Options.First().Value.ToString();
+                var commandType = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.GetInterfaces().Contains(typeof(ISlashCommand))).FirstOrDefault(t => t.Name.ToLower() == name.ToLower() + "command");
+                if (commandType == null)
+                {
+                    await command.RespondAsync("Command not found.", ephemeral:true);
+                    return;
+                }
+                var commandInstance = (ISlashCommand)Activator.CreateInstance(commandType);
+                commandInstance.SetDependencies(dependencyProvider);
+                await command.DeferAsync(ephemeral:true);
+                await Program.RegisterSlashCommand(commandInstance);
+                await command.FollowupAsync($"Registered command {name}.", ephemeral:true);
             }
         }
 

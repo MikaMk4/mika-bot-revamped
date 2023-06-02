@@ -18,6 +18,7 @@ namespace MikaBotRevamped
         public List<Waifu> Waifus { get; set; } = new List<Waifu>();
         public List<UnclaimedWaifu> UnclaimedWaifus { get; set; } = new List<UnclaimedWaifu>();
         public List<StackableItem> Items { get; set; } = new List<StackableItem>();
+        public DateTime LastDaily { get; set; } = DateTime.MinValue;
 
         [NonSerialized]
         public RestFollowupMessage? RestFollowupMessage;
@@ -37,7 +38,9 @@ namespace MikaBotRevamped
             }
             else
             {
+                Items.Remove(stackableItem);
                 stackableItem.Amount += amount;
+                Items.Add(stackableItem);
             }
         }
 

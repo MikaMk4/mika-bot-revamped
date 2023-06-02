@@ -131,6 +131,11 @@ namespace MikaBotRevamped
             Log(new LogMessage(logSeverity, source, message, exception));
             return Task.CompletedTask;
         }
+
+        internal static async Task RegisterSlashCommand(ISlashCommand commandInstance)
+        {
+            await bot.SlashCommandHandler.RegisterCommand(MikaBotServerId, commandInstance);
+        }
     }
 
     public static class EnumExtension
