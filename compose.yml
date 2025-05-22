@@ -1,0 +1,10 @@
+services:
+  mika-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: mika-bot
+    container_name: mika-bot
+    restart: unless-stopped
+    environment:
+      - DISCORD_TOKEN=${DISCORD_TOKEN}
