@@ -16,7 +16,10 @@ namespace MikaBotRevamped.Dependencies
 
         public JsonPersistenceProvider(string workingDirectory)
         {
-            this.workingDirectory = workingDirectory;
+            if (!Directory.Exists(Path.Combine(workingDirectory, "Data")))
+                Directory.CreateDirectory(Path.Combine(workingDirectory, "Data"));
+
+            this.workingDirectory = Path.Combine(workingDirectory, "Data");
         }
 
         public async Task<List<User>> LoadAllUsers()
