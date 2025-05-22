@@ -21,6 +21,9 @@ namespace MikaBotRevamped.Dependencies
 
         public async Task<List<User>> LoadAllUsers()
         {
+            if (!Directory.Exists(Path.Combine(workingDirectory, "Users")))
+                Directory.CreateDirectory(Path.Combine(workingDirectory, "Users"));
+            
             string usersDirectory = Path.Combine(workingDirectory, "Users");
 
             if (!Directory.Exists(usersDirectory))
