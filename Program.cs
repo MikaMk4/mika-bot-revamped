@@ -35,8 +35,6 @@ namespace MikaBotRevamped
         {
             string token = Environment.GetEnvironmentVariable(tokenEnvName) ?? throw new Exception($"Environment variable {tokenEnvName} not found.");
 
-            Log(LogSeverity.Info, "main", token);
-
             YoutubeProvider youtubeProvider = new();
             WaifuProvider waifuProvider = new("https://api.waifu.pics/", "https://api.waifu.im/");
             GachaProvider gachaProvider = new();
